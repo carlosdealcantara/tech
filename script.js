@@ -3,33 +3,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     // 1. LANGUAGE LOGIC
     // =========================================================
-
     const langBtnEn = document.getElementById('lang-btn-en');
     const langBtnPt = document.getElementById('lang-btn-pt');
 
     function switchLanguage(lang) {
-        // Update button active states
-        if (lang === 'en') {
-            langBtnEn && langBtnEn.classList.add('active');
-            langBtnPt && langBtnPt.classList.remove('active');
-        } else {
-            langBtnEn && langBtnEn.classList.remove('active');
-            langBtnPt && langBtnPt.classList.add('active');
-        }
+        if (!langBtnEn || !langBtnPt) return;
 
-        // Update all elements with data-en / data-pt attributes
+        // Update button active states
+        langBtnEn.classList.toggle('active', lang === 'en');
+        langBtnPt.classList.toggle('active', lang === 'pt');
+
+        // Update all translatable elements
         document.querySelectorAll('[data-en][data-pt]').forEach(el => {
-            el.textContent = el.getAttribute(`data-${lang}`);
+            el.textContent = el.getAttribute('data-' + lang);
         });
 
-        // Update HTML lang attribute
         document.documentElement.lang = lang;
-
-        // Persist choice in sessionStorage
         sessionStorage.setItem('lang', lang);
     }
 
-    // Detect language: URL param takes priority, then session, then default EN
+    // Detect language from URL, then sessionStorage, then default 'en'
     const urlParams = new URLSearchParams(window.location.search);
     const urlLang = urlParams.get('lang');
     const sessionLang = sessionStorage.getItem('lang');
@@ -41,36 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
         initialLang = sessionLang;
     }
 
-    // Apply initial language
     switchLanguage(initialLang);
 
-    // Button click handlers — each one sets a fixed language
-    langBtnEn && langBtnEn.addEventListener('click', () => switchLanguage('en'));
-    langBtnPt && langBtnPt.addEventListener('click', () => switchLanguage('pt'));
+    // Each button sets a FIXED language — no toggle
+    if (langBtnEn) langBtnEn.addEventListener('click', () => switchLanguage('en'));
+    if (langBtnPt) langBtnPt.addEventListener('click', () => switchLanguage('pt'));
 
 
     // =========================================================
     // 2. MOBILE MENU TOGGLE
     // =========================================================
-
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', () => {
-            const isDisplayed = window.getComputedStyle(navLinks).display !== 'none';
-            if (isDisplayed && window.innerWidth <= 768) {
+            const isVisible = navLinks.style.display === 'flex';
+            if (isVisible) {
                 navLinks.style.display = 'none';
             } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '72px';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'rgba(5, 5, 8, 0.95)';
-                navLinks.style.padding = '2rem';
-                navLinks.style.borderBottom = '1px solid var(--border-color)';
+                navLinks.style.cssText = 'display:flex; flex-direction:column; position:absolute; top:72px; left:0; right:0; background:rgba(5,5,8,0.97); padding:2rem; border-bottom:1px solid rgba(255,255,255,0.08);';
             }
         });
     }
@@ -83,19 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // 3. SMOOTH SCROLLING FOR ANCHOR LINKS
+    // 3. SMOOTH SCROLL FOR ANCHOR LINKS
     // =========================================================
-
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (!targetId || targetId === '#') return;
-
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
+            const target = document.querySelector(targetId);
+            if (target) {
                 e.preventDefault();
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-
+                target.scrollIntoView({ behavior: 'smooth' });
                 if (window.innerWidth <= 768 && navLinks) {
                     navLinks.style.display = 'none';
                 }
@@ -105,47 +85,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // 4. GSAP HORIZONTAL SCROLL FOR PORTFOLIO
+    // 4. GSAP HORIZONTAL SCROLL (PORTFOLIO)
     // =========================================================
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn('GSAP not available. Horizontal scroll disabled.');
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const portfolioSticky = document.querySelector('.portfolio-sticky');
-    const portfolioTrack = document.querySelector('#portfolio-track');
+    const portfolioTrack  = document.getElementById('portfolio-track');
 
-    if (portfolioSticky && portfolioTrack && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
+    if (!portfolioSticky || !portfolioTrack) return;
 
-        // Only activate on desktop (>= 768px)
-        const mm = gsap.matchMedia();
-
-        mm.add('(min-width: 768px)', () => {
-            // Calculate how much the track needs to scroll
-            const getScrollAmount = () => {
-                return -(portfolioTrack.scrollWidth - window.innerWidth);
-            };
+    // Only on desktop
+    ScrollTrigger.matchMedia({
+        '(min-width: 769px)': function () {
+            const getScrollAmount = () =>
+                -(portfolioTrack.scrollWidth - portfolioSticky.offsetWidth);
 
             gsap.to(portfolioTrack, {
                 x: getScrollAmount,
                 ease: 'none',
                 scrollTrigger: {
                     trigger: '.portfolio-sticky',
-                    start: 'top top',
-                    end: () => `+=${Math.abs(getScrollAmount())}`,
-                    scrub: 1,
                     pin: true,
-                    anticipatePin: 1,
+                    scrub: 1,
+                    start: 'top top',
+                    end: () => '+=' + Math.abs(getScrollAmount()),
                     invalidateOnRefresh: true,
+                    anticipatePin: 1,
                 }
             });
-        });
-
-        // On mobile: reset any transforms and disable pin
-        mm.add('(max-width: 767px)', () => {
-            portfolioTrack.style.transform = '';
-        });
-
-    } else if (portfolioTrack) {
-        // GSAP not loaded: just show cards normally (fallback)
-        console.warn('GSAP not loaded; horizontal scroll disabled.');
-    }
+        }
+    });
 
 });
