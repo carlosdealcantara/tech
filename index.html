@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     
+    <!-- Flag Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,9 +34,9 @@
                 <a href="#about" data-en="About" data-pt="Sobre">About</a>
                 <a href="#contact" class="btn-sm btn-primary" data-en="Contact" data-pt="Contato">Contact</a>
                 <button id="lang-toggle" class="lang-toggle" aria-label="Toggle Language">
-                    <span class="lang-en active">🇺🇸 EN</span>
+                    <span class="lang-en active"><span class="fi fi-us"></span> EN</span>
                     <span class="lang-divider">|</span>
-                    <span class="lang-pt">🇧🇷 PT</span>
+                    <span class="lang-pt"><span class="fi fi-br"></span> PT</span>
                 </button>
             </nav>
             <button class="mobile-menu-btn" aria-label="Menu">
@@ -156,33 +159,72 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title" data-en="Featured Work" data-pt="Projetos em Destaque">Featured Work</h2>
-                    <p class="section-desc" data-en="Technical demonstrations and systems engineered for performance." data-pt="Demonstrações técnicas e sistemas projetados para alta performance.">Technical demonstrations and systems engineered for performance.</p>
+        <section id="portfolio" class="portfolio-container section">
+            <div class="portfolio-sticky">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title" data-en="Featured Work" data-pt="Projetos em Destaque">Featured Work</h2>
+                        <p class="section-desc" data-en="Technical demonstrations and systems engineered for performance." data-pt="Demonstrações técnicas e sistemas projetados para alta performance.">Technical demonstrations and systems engineered for performance.</p>
+                    </div>
                 </div>
 
-                <div class="portfolio-grid">
-                    <div class="card project-card">
-                        <div class="project-tag">Technical Demo</div>
-                        <h3 class="project-title">Local Radar</h3>
-                        <p class="project-desc" data-en="A custom data aggregation tool designed to map local business opportunities. Features automated scraping, data structuring, and a clean analytical dashboard." data-pt="Ferramenta de agregação de dados para mapear oportunidades locais. Inclui scraping automático e dashboard analítico.">A custom data aggregation tool designed to map local business opportunities. Features automated scraping, data structuring, and a clean analytical dashboard.</p>
-                        <div class="project-tech">
-                            <span>Automation</span>
-                            <span>Data Structuring</span>
-                            <span>Dashboard</span>
+                <div class="portfolio-track-wrapper">
+                    <div class="portfolio-track" id="portfolio-track">
+                        <!-- Card 1: Viaei -->
+                        <div class="card project-card">
+                            <div class="project-tag">Ecosystem & Automation</div>
+                            <h3 class="project-title" data-en="Viaei Community & WhatsApp Engine" data-pt="Comunidade Viaei & Motor WhatsApp">Viaei Community & WhatsApp Engine</h3>
+                            <p class="project-desc" data-en="International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%." data-pt="Comunidade internacional de trocas culturais com banco de dados inteligente e cronograma em tempo real. Integrada a um motor autônomo de WhatsApp que reduziu o tempo de resposta manual em 90%.">International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%.</p>
+                            <div class="project-tech">
+                                <span>Smart DB</span>
+                                <span>Dynamic Routing</span>
+                                <span>Baileys/Node.js</span>
+                            </div>
+                            <div class="project-link-wrapper">
+                                <a href="https://viaei.com" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="card project-card">
-                        <div class="project-tag">Production System</div>
-                        <h3 class="project-title" data-en="WhatsApp Automation Engine" data-pt="Motor de Automação WhatsApp">WhatsApp Automation Engine</h3>
-                        <p class="project-desc" data-en="An autonomous messaging bot built for seamless customer service and onboarding. Reduced manual response time by 90% while maintaining a natural conversation flow." data-pt="Bot autônomo para atendimento ao cliente e onboarding. Reduziu o tempo de resposta manual em 90% mantendo fluidez natural.">An autonomous messaging bot built for seamless customer service and onboarding. Reduced manual response time by 90% while maintaining a natural conversation flow.</p>
-                        <div class="project-tech">
-                            <span>Node.js</span>
-                            <span>Baileys</span>
-                            <span>API Integration</span>
+                        <!-- Card 2: GovCondominial -->
+                        <div class="card project-card">
+                            <div class="project-tag">Corporate Portal</div>
+                            <h3 class="project-title">GovCondominial</h3>
+                            <p class="project-desc" data-en="A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation." data-pt="Um portal profissional e de gestão para administração de condomínios, focado em confiança, arquitetura de informação clara e geração de leads.">A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation.</p>
+                            <div class="project-tech">
+                                <span>Web Design</span>
+                                <span>Lead Capture</span>
+                            </div>
+                            <div class="project-link-wrapper">
+                                <a href="https://viaei.com/govcondominial/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Varejão Araújo -->
+                        <div class="card project-card">
+                            <div class="project-tag">E-Commerce & Retail</div>
+                            <h3 class="project-title">Varejão Araújo</h3>
+                            <p class="project-desc" data-en="A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO." data-pt="Uma vitrine digital para um mercado local, otimizando a jornada do cliente da descoberta à entrega. Foco em alta performance e SEO local.">A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO.</p>
+                            <div class="project-tech">
+                                <span>Retail UI/UX</span>
+                                <span>Local SEO</span>
+                            </div>
+                            <div class="project-link-wrapper">
+                                <a href="https://dev.viaei.com/varejaoaraujodi/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Multiversom -->
+                        <div class="card project-card">
+                            <div class="project-tag">Artist Portfolio</div>
+                            <h3 class="project-title">Multiversom</h3>
+                            <p class="project-desc" data-en="A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience." data-pt="Um portfólio altamente estético e customizado para um músico. Conta com integração de mídia rica, agenda de eventos e uma experiência de usuário imersiva.">A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience.</p>
+                            <div class="project-tech">
+                                <span>Rich Media</span>
+                                <span>Custom Design</span>
+                            </div>
+                            <div class="project-link-wrapper">
+                                <a href="https://multiversom.viaei.com/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,12 +236,7 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-image-wrapper">
-                        <!-- Placeholder elegant image -->
-                        <div class="about-image-placeholder">
-                            <div class="placeholder-icon">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            </div>
-                        </div>
+                        <img src="assets/carlos.jpg" alt="Carlos de Alcântara" class="about-photo">
                     </div>
                     <div class="about-content">
                         <h2 class="section-title" data-en="Behind the Code" data-pt="Por Trás do Código">Behind the Code</h2>
@@ -207,7 +244,7 @@
                         <p data-en="With native-level English fluency, I seamlessly bridge the gap for US-based clients, ensuring crystal-clear communication and zero friction from the first discovery call to final deployment." data-pt="Combinando habilidades técnicas avançadas com comunicação clara, entrego soluções que funcionam no mundo real, sem a complexidade desnecessária.">With native-level English fluency, I seamlessly bridge the gap for US-based clients, ensuring crystal-clear communication and zero friction from the first discovery call to final deployment.</p>
                         <div class="about-stats">
                             <div class="stat-item">
-                                <span class="stat-icon">🇺🇸</span>
+                                <span class="stat-icon"><span class="fi fi-us"></span></span>
                                 <span class="stat-text" data-en="Native-Level English" data-pt="Inglês Fluente / Nativo">Native-Level English</span>
                             </div>
                             <div class="stat-item">
@@ -239,14 +276,14 @@
                     </div>
                 </div>
 
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Form submission is a placeholder. Please use email or Calendly.');">
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label for="name" data-en="Name" data-pt="Nome">Name</label>
-                        <input type="text" id="name" required placeholder="John Doe">
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="email" data-en="Email" data-pt="E-mail">Email</label>
-                        <input type="email" id="email" required placeholder="john@company.com">
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
                     </div>
                     <div class="form-group">
                         <label for="message" data-en="Message" data-pt="Mensagem">Message</label>

@@ -40,6 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
         switchLanguage(newLang);
     });
 
+    // Initialize Language from URL (?lang=pt or #pt)
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    const hashParam = window.location.hash.replace('#', '');
+    
+    if (langParam === 'pt' || hashParam === 'pt') {
+        switchLanguage('pt');
+    } else if (langParam === 'en' || hashParam === 'en') {
+        switchLanguage('en');
+    } else {
+        switchLanguage(currentLang); // ensure default state is cleanly applied
+    }
+
     // Mobile Menu Toggle (Basic implementation)
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
@@ -98,4 +111,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Horizontal Scroll Logic for Portfolio
+    const portfolioContainer = document.querySelector('.portfolio-container');
+    const portfolioTrack = document.querySelector('.portfolio-track');
+    
+    if (portfolioContainer && portfolioTrack) {
+        window.addEventListener('scroll', () => {
+            const containerRect = portfolioContainer.getBoundingClientRect();
+            const scrollableDistance = portfolioContainer.offsetHeight - window.innerHeight;
+            
+            let scrollPercentage = -containerRect.top / scrollableDistance;
+            scrollPercentage = Math.max(0, Math.min(1, scrollPercentage));
+            
+            // Add padding so it doesn't stop flush against the very edge
+            const paddingOffset = window.innerWidth * 0.1; 
+            const maxTranslate = portfolioTrack.scrollWidth - window.innerWidth + paddingOffset;
+            
+            if (maxTranslate > 0) {
+                const currentTranslate = maxTranslate * scrollPercentage;
+                portfolioTrack.style.transform = `translateX(-${currentTranslate}px)`;
+            } else {
+                portfolioTrack.style.transform = `translateX(0)`;
+            }
+        });
+    }
 });

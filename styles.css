@@ -394,11 +394,43 @@ h1, h2, h3, h4 {
     color: var(--text-muted);
 }
 
-/* Portfolio */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+/* Portfolio Horizontal Scroll */
+.portfolio-container {
+    height: 300vh; /* Creates scrollable space for the sticky section */
+    padding: 0;
+}
+
+.portfolio-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 5rem;
+}
+
+.portfolio-track-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 2rem; /* padding for shadow/hover effects */
+}
+
+.portfolio-track {
+    display: flex;
     gap: 2rem;
+    padding: 0 5%;
+    width: max-content;
+    will-change: transform;
+    transition: transform 0.1s ease-out; /* Smooth snapping if we use JS smooth scroll */
+}
+
+.project-card {
+    width: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-tag {
@@ -418,12 +450,14 @@ h1, h2, h3, h4 {
 .project-desc {
     color: var(--text-muted);
     margin-bottom: 1.5rem;
+    flex-grow: 1; /* Pushes the tech tags and buttons down */
 }
 
 .project-tech {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-bottom: 1.5rem;
 }
 
 .project-tech span {
@@ -432,6 +466,33 @@ h1, h2, h3, h4 {
     border-radius: 100px;
     font-size: 0.75rem;
     color: var(--text-muted);
+}
+
+.project-link-wrapper {
+    margin-top: auto;
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-main);
+    font-size: 0.875rem;
+}
+
+.btn-outline:hover {
+    border-color: var(--primary);
+    background: rgba(124, 58, 237, 0.1);
+    color: white;
 }
 
 /* About */
@@ -446,21 +507,20 @@ h1, h2, h3, h4 {
     position: relative;
 }
 
-.about-image-placeholder {
+.about-photo {
     width: 100%;
     aspect-ratio: 1;
-    background: linear-gradient(145deg, rgba(30,30,40,0.8), rgba(15,15,20,0.8));
-    border: 1px solid var(--border-color);
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    filter: grayscale(20%) contrast(110%);
+    transition: var(--transition);
 }
 
-.placeholder-icon {
-    color: var(--primary);
-    opacity: 0.5;
+.about-photo:hover {
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.02);
 }
 
 .about-content h2 {
