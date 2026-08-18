@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Background Glow Effects -->
@@ -33,11 +37,15 @@
                 <a href="#portfolio" data-en="Portfolio" data-pt="Portfólio">Portfolio</a>
                 <a href="#about" data-en="About" data-pt="Sobre">About</a>
                 <a href="#contact" class="btn-sm btn-primary" data-en="Contact" data-pt="Contato">Contact</a>
-                <button id="lang-toggle" class="lang-toggle" aria-label="Toggle Language">
-                    <span class="lang-en active"><span class="fi fi-us"></span> EN</span>
+                <div class="lang-switcher" role="group" aria-label="Language selection">
+                    <button id="lang-btn-en" class="lang-btn active" aria-label="Switch to English">
+                        <span class="fi fi-us"></span> EN
+                    </button>
                     <span class="lang-divider">|</span>
-                    <span class="lang-pt"><span class="fi fi-br"></span> PT</span>
-                </button>
+                    <button id="lang-btn-pt" class="lang-btn" aria-label="Mudar para Português">
+                        <span class="fi fi-br"></span> PT
+                    </button>
+                </div>
             </nav>
             <button class="mobile-menu-btn" aria-label="Menu">
                 <span></span><span></span><span></span>

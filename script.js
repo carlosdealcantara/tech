@@ -1,59 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Language Toggle Logic
-    const langToggleBtn = document.getElementById('lang-toggle');
-    const langEnSpan = document.querySelector('.lang-en');
-    const langPtSpan = document.querySelector('.lang-pt');
-    
-    let currentLang = 'en';
+
+    // =========================================================
+    // 1. LANGUAGE LOGIC
+    // =========================================================
+
+    const langBtnEn = document.getElementById('lang-btn-en');
+    const langBtnPt = document.getElementById('lang-btn-pt');
 
     function switchLanguage(lang) {
-        currentLang = lang;
-        
-        // Update toggle button visuals
+        // Update button active states
         if (lang === 'en') {
-            langEnSpan.classList.add('active');
-            langPtSpan.classList.remove('active');
+            langBtnEn && langBtnEn.classList.add('active');
+            langBtnPt && langBtnPt.classList.remove('active');
         } else {
-            langEnSpan.classList.remove('active');
-            langPtSpan.classList.add('active');
+            langBtnEn && langBtnEn.classList.remove('active');
+            langBtnPt && langBtnPt.classList.add('active');
         }
 
-        // Update all elements with data-[lang] attributes
-        const translatableElements = document.querySelectorAll('[data-en][data-pt]');
-        
-        translatableElements.forEach(el => {
-            // For inputs/textareas, update placeholder if it exists instead of textContent
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                // If it's a label, update text content, otherwise we'd need placeholder translations
-                el.textContent = el.getAttribute(`data-${lang}`);
-            } else {
-                el.textContent = el.getAttribute(`data-${lang}`);
-            }
+        // Update all elements with data-en / data-pt attributes
+        document.querySelectorAll('[data-en][data-pt]').forEach(el => {
+            el.textContent = el.getAttribute(`data-${lang}`);
         });
 
         // Update HTML lang attribute
         document.documentElement.lang = lang;
+
+        // Persist choice in sessionStorage
+        sessionStorage.setItem('lang', lang);
     }
 
-    langToggleBtn.addEventListener('click', () => {
-        const newLang = currentLang === 'en' ? 'pt' : 'en';
-        switchLanguage(newLang);
-    });
-
-    // Initialize Language from URL (?lang=pt or #pt)
+    // Detect language: URL param takes priority, then session, then default EN
     const urlParams = new URLSearchParams(window.location.search);
-    const langParam = urlParams.get('lang');
-    const hashParam = window.location.hash.replace('#', '');
-    
-    if (langParam === 'pt' || hashParam === 'pt') {
-        switchLanguage('pt');
-    } else if (langParam === 'en' || hashParam === 'en') {
-        switchLanguage('en');
-    } else {
-        switchLanguage(currentLang); // ensure default state is cleanly applied
+    const urlLang = urlParams.get('lang');
+    const sessionLang = sessionStorage.getItem('lang');
+
+    let initialLang = 'en';
+    if (urlLang === 'pt' || urlLang === 'en') {
+        initialLang = urlLang;
+    } else if (sessionLang === 'pt' || sessionLang === 'en') {
+        initialLang = sessionLang;
     }
 
-    // Mobile Menu Toggle (Basic implementation)
+    // Apply initial language
+    switchLanguage(initialLang);
+
+    // Button click handlers — each one sets a fixed language
+    langBtnEn && langBtnEn.addEventListener('click', () => switchLanguage('en'));
+    langBtnPt && langBtnPt.addEventListener('click', () => switchLanguage('pt'));
+
+
+    // =========================================================
+    // 2. MOBILE MENU TOGGLE
+    // =========================================================
+
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
@@ -76,35 +75,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Reset inline styles on resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && navLinks) {
-            navLinks.style.display = '';
-            navLinks.style.flexDirection = '';
-            navLinks.style.position = '';
-            navLinks.style.top = '';
-            navLinks.style.left = '';
-            navLinks.style.right = '';
-            navLinks.style.background = '';
-            navLinks.style.padding = '';
-            navLinks.style.borderBottom = '';
+            navLinks.style.cssText = '';
         }
     });
 
-    // Smooth Scrolling for anchor links
+
+    // =========================================================
+    // 3. SMOOTH SCROLLING FOR ANCHOR LINKS
+    // =========================================================
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if(targetId === '#') return;
-            
+            if (!targetId || targetId === '#') return;
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+
                 if (window.innerWidth <= 768 && navLinks) {
                     navLinks.style.display = 'none';
                 }
@@ -112,28 +103,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Horizontal Scroll Logic for Portfolio
-    const portfolioContainer = document.querySelector('.portfolio-container');
-    const portfolioTrack = document.querySelector('.portfolio-track');
-    
-    if (portfolioContainer && portfolioTrack) {
-        window.addEventListener('scroll', () => {
-            const containerRect = portfolioContainer.getBoundingClientRect();
-            const scrollableDistance = portfolioContainer.offsetHeight - window.innerHeight;
-            
-            let scrollPercentage = -containerRect.top / scrollableDistance;
-            scrollPercentage = Math.max(0, Math.min(1, scrollPercentage));
-            
-            // Add padding so it doesn't stop flush against the very edge
-            const paddingOffset = window.innerWidth * 0.1; 
-            const maxTranslate = portfolioTrack.scrollWidth - window.innerWidth + paddingOffset;
-            
-            if (maxTranslate > 0) {
-                const currentTranslate = maxTranslate * scrollPercentage;
-                portfolioTrack.style.transform = `translateX(-${currentTranslate}px)`;
-            } else {
-                portfolioTrack.style.transform = `translateX(0)`;
-            }
+
+    // =========================================================
+    // 4. GSAP HORIZONTAL SCROLL FOR PORTFOLIO
+    // =========================================================
+
+    const portfolioSticky = document.querySelector('.portfolio-sticky');
+    const portfolioTrack = document.querySelector('#portfolio-track');
+
+    if (portfolioSticky && portfolioTrack && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Only activate on desktop (>= 768px)
+        const mm = gsap.matchMedia();
+
+        mm.add('(min-width: 768px)', () => {
+            // Calculate how much the track needs to scroll
+            const getScrollAmount = () => {
+                return -(portfolioTrack.scrollWidth - window.innerWidth);
+            };
+
+            gsap.to(portfolioTrack, {
+                x: getScrollAmount,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.portfolio-sticky',
+                    start: 'top top',
+                    end: () => `+=${Math.abs(getScrollAmount())}`,
+                    scrub: 1,
+                    pin: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                }
+            });
         });
+
+        // On mobile: reset any transforms and disable pin
+        mm.add('(max-width: 767px)', () => {
+            portfolioTrack.style.transform = '';
+        });
+
+    } else if (portfolioTrack) {
+        // GSAP not loaded: just show cards normally (fallback)
+        console.warn('GSAP not loaded; horizontal scroll disabled.');
     }
+
 });
