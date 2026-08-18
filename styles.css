@@ -254,6 +254,10 @@ h1, h2, h3, h4 {
     background: rgba(124, 58, 237, 0.2);
 }
 
+.fi {
+    background-color: transparent !important;
+}
+
 .mobile-menu-btn {
     display: none;
     background: none;
