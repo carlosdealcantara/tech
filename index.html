@@ -14,7 +14,7 @@
     <!-- Flag Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
 
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -60,23 +60,35 @@
 
                 <!-- Hero Section -->
                 <section id="hero" class="hero horizontal-section">
-            <div class="container hero-content">
-                <div class="hero-badge" data-en="🚀 Elevating Local Businesses" data-pt="🚀 Escalando Negócios Locais">🚀 Elevating Local Businesses</div>
-                <h1 class="hero-title">
-                    <span data-en="I build systems that" data-pt="Eu construo sistemas que">I build systems that</span><br>
-                    <span class="text-gradient" data-en="save time & money." data-pt="poupam tempo e dinheiro.">save time & money.</span>
-                </h1>
-                <p class="hero-subtitle" data-en="I find what's costing your business money, identify bottlenecks, and build reliable automation to fix it. Professional tech solutions designed for high ROI." data-pt="Identifico o que está custando caro para o seu negócio e crio automações confiáveis para resolver. Soluções tecnológicas focadas em alto ROI.">
-                    I find what's costing your business money, identify bottlenecks, and build reliable automation to fix it. Professional tech solutions designed for high ROI.
-                </p>
-                <div class="hero-actions">
-                    <a href="https://calendly.com" target="_blank" rel="noopener" class="btn btn-primary btn-glow">
-                        <span data-en="Book a Free 15-min Call" data-pt="Agendar Call Gratuita (15 min)">Book a Free 15-min Call</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                    </a>
-                </div>
-            </div>
-        </section>
+                    <!-- Background Video Setup -->
+                    <video autoplay loop muted playsinline class="hero-video-bg">
+                        <!-- We will use a local asset, user needs to upload a video -->
+                        <source src="assets/background.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-overlay"></div>
+                    
+                    <!-- Giant Background Typography (Slogan) -->
+                    <div class="hero-slogan-bg">ENGINEERED</div>
+
+                    <div class="container hero-content">
+                        <div class="hero-badge" data-en="🚀 Tech & Automation" data-pt="🚀 Tecnologia & Automação">🚀 Tech & Automation</div>
+                        
+                        <h1 class="hero-title">
+                            <span data-en="Digital solutions" data-pt="Soluções digitais">Digital solutions</span><br>
+                            <span class="text-gradient" data-en="with impact." data-pt="com impacto real.">with impact.</span>
+                        </h1>
+                        
+                        <p class="hero-subtitle" data-en="I design autonomous systems, intelligent workflows, and premium digital experiences that elevate your brand and save your time." data-pt="Desenvolvo sistemas autônomos, workflows inteligentes e experiências digitais premium que elevam sua marca e poupam seu tempo.">
+                            I design autonomous systems, intelligent workflows, and premium digital experiences that elevate your brand and save your time.
+                        </p>
+                        
+                        <!-- CTA removed for a cleaner, portfolio-first approach -->
+                        <div class="hero-scroll-indicator">
+                            <span class="mouse-icon"></span>
+                            <span class="scroll-text" data-en="Scroll to explore" data-pt="Role para explorar">Scroll to explore</span>
+                        </div>
+                    </div>
+                </section>
 
         <!-- Services Section -->
         <section id="services" class="services horizontal-section">
