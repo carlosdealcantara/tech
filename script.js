@@ -100,25 +100,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!portfolioSticky || !portfolioTrack) return;
 
     // Only on desktop
-    ScrollTrigger.matchMedia({
-        '(min-width: 769px)': function () {
-            const getScrollAmount = () =>
-                -(portfolioTrack.scrollWidth - portfolioSticky.offsetWidth);
+    let mm = gsap.matchMedia();
+    mm.add('(min-width: 769px)', () => {
+        const getScrollAmount = () =>
+            -(portfolioTrack.scrollWidth - portfolioSticky.offsetWidth);
 
-            gsap.to(portfolioTrack, {
-                x: getScrollAmount,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.portfolio-sticky',
-                    pin: true,
-                    scrub: 1,
-                    start: 'top top',
-                    end: () => '+=' + Math.abs(getScrollAmount()),
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1,
-                }
-            });
-        }
+        gsap.to(portfolioTrack, {
+            x: getScrollAmount,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.portfolio-sticky',
+                pin: true,
+                scrub: 1,
+                start: 'top top',
+                end: () => '+=' + Math.abs(getScrollAmount()),
+                invalidateOnRefresh: true,
+                anticipatePin: 1,
+            }
+        });
     });
 
 });
