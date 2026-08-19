@@ -102,21 +102,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only on desktop
     let mm = gsap.matchMedia();
     mm.add('(min-width: 769px)', () => {
-        const getScrollAmount = () =>
-            -(portfolioTrack.scrollWidth - portfolioSticky.offsetWidth);
+        // Calculate the exact width we need to slide
+        function getScrollAmount() {
+            let trackWidth = portfolioTrack.scrollWidth;
+            let viewportWidth = window.innerWidth;
+            return -(trackWidth - viewportWidth);
+        }
 
-        gsap.to(portfolioTrack, {
+        const tween = gsap.to(portfolioTrack, {
             x: getScrollAmount,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.portfolio-sticky',
-                pin: true,
-                scrub: 1,
-                start: 'top top',
-                end: () => '+=' + Math.abs(getScrollAmount()),
-                invalidateOnRefresh: true,
-                anticipatePin: 1,
-            }
+            ease: 'none'
+        });
+
+        ScrollTrigger.create({
+            trigger: '.portfolio-container',
+            start: 'top top',
+            end: () => `+=${Math.abs(getScrollAmount())}`,
+            pin: true,
+            animation: tween,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            anticipatePin: 1
         });
     });
 
