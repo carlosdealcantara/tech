@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================================
+    // 0. PRELOADER
+    // =========================================================
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+            setTimeout(() => loader.remove(), 600);
+        }
+    });
+
+    // =========================================================
     // 1. LANGUAGE LOGIC
     // =========================================================
     const langBtnEn = document.getElementById('lang-btn-en');
