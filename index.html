@@ -14,7 +14,7 @@
     <!-- Flag Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
 
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=6">
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -54,8 +54,12 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero section">
+        <!-- Horizontal Scroll Container (Inverted L) -->
+        <div id="horizontal-container" class="horizontal-container">
+            <div id="main-horizontal-track" class="main-horizontal-track">
+
+                <!-- Hero Section -->
+                <section id="hero" class="hero horizontal-section">
             <div class="container hero-content">
                 <div class="hero-badge" data-en="🚀 Elevating Local Businesses" data-pt="🚀 Escalando Negócios Locais">🚀 Elevating Local Businesses</div>
                 <h1 class="hero-title">
@@ -75,7 +79,7 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="services section">
+        <section id="services" class="services horizontal-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title" data-en="How I Can Help" data-pt="Como Posso Ajudar">How I Can Help</h2>
@@ -131,7 +135,7 @@
         </section>
 
         <!-- Process Section -->
-        <section id="process" class="process section">
+        <section id="process" class="process horizontal-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title" data-en="How It Works" data-pt="Como Funciona">How It Works</h2>
@@ -167,19 +171,16 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio-container section">
-            <div class="portfolio-sticky">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title" data-en="Featured Work" data-pt="Projetos em Destaque">Featured Work</h2>
-                        <p class="section-desc" data-en="Technical demonstrations and systems engineered for performance." data-pt="Demonstrações técnicas e sistemas projetados para alta performance.">Technical demonstrations and systems engineered for performance.</p>
-                    </div>
+        <section id="portfolio" class="portfolio horizontal-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="Featured Work" data-pt="Projetos em Destaque">Featured Work</h2>
+                    <p class="section-desc" data-en="Technical demonstrations and systems engineered for performance." data-pt="Demonstrações técnicas e sistemas projetados para alta performance.">Technical demonstrations and systems engineered for performance.</p>
                 </div>
 
-                <div class="portfolio-track-wrapper">
-                    <div class="portfolio-track" id="portfolio-track">
-                        <!-- Card 1: Viaei -->
-                        <div class="card project-card">
+                <div class="portfolio-grid">
+                    <!-- Card 1: Viaei -->
+                    <div class="card project-card">
                             <div class="project-tag">Ecosystem & Automation</div>
                             <h3 class="project-title" data-en="Viaei Community & WhatsApp Engine" data-pt="Comunidade Viaei & Motor WhatsApp">Viaei Community & WhatsApp Engine</h3>
                             <p class="project-desc" data-en="International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%." data-pt="Comunidade internacional de trocas culturais com banco de dados inteligente e cronograma em tempo real. Integrada a um motor autônomo de WhatsApp que reduziu o tempo de resposta manual em 90%.">International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%.</p>
@@ -236,11 +237,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="about section">
+        <section id="about" class="about horizontal-section">
             <div class="container">
                 <div class="about-grid">
                     <div class="about-image-wrapper">
@@ -265,8 +265,11 @@
             </div>
         </section>
 
+            </div> <!-- /main-horizontal-track -->
+        </div> <!-- /horizontal-container -->
+
         <!-- Contact Section -->
-        <section id="contact" class="contact section">
+        <section id="contact" class="contact vertical-section">
             <div class="container contact-container">
                 <div class="contact-info">
                     <h2 class="section-title" data-en="Let's build something efficient." data-pt="Vamos otimizar sua operação.">Let's build something efficient.</h2>
@@ -316,6 +319,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>

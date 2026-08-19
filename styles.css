@@ -409,38 +409,46 @@ h1, h2, h3, h4 {
     color: var(--text-muted);
 }
 
-/* Portfolio Horizontal Scroll (GSAP-powered) */
-.portfolio-container {
-    /* Height is set dynamically by GSAP ScrollTrigger pin */
+/* Full Site Horizontal Scroll (GSAP-powered) */
+.horizontal-container {
     padding: 0;
-}
-
-.portfolio-sticky {
+    overflow: hidden;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    padding-top: 5rem;
+    width: 100vw;
 }
 
-.portfolio-track-wrapper {
-    width: 100%;
-    overflow: hidden;
-    padding-bottom: 2rem;
-}
-
-.portfolio-track {
+.main-horizontal-track {
     display: flex;
-    gap: 2rem;
-    padding: 0 5%;
+    height: 100vh;
     width: max-content;
     will-change: transform;
 }
 
-.project-card {
-    width: 400px;
+.horizontal-section {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    padding: 72px 0 2rem 0; /* Account for navbar */
     flex-shrink: 0;
+}
+
+.horizontal-section > .container {
+    width: 100%;
+}
+
+.vertical-section {
+    padding: 8rem 0;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.project-card {
     display: flex;
     flex-direction: column;
 }
@@ -718,27 +726,20 @@ h1, h2, h3, h4 {
         text-align: center;
     }
 
-    /* Portfolio: fallback to vertical stack on mobile */
-    .portfolio-container {
-        padding: 5rem 0;
-    }
-
-    .portfolio-sticky {
+    /* Fallback to vertical stack on mobile for the horizontal sections */
+    .horizontal-container, .main-horizontal-track {
         height: auto;
-        padding-top: 0;
+        width: 100%;
+        display: block; /* Disable flex row */
     }
 
-    .portfolio-track-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    .horizontal-section {
+        width: 100%;
+        height: auto;
+        padding: 5rem 0; /* Normal vertical section padding */
     }
 
-    .portfolio-track {
-        padding: 0 1.5rem;
-    }
-
-    .project-card {
-        width: 85vw;
-        min-width: 280px;
+    .portfolio-grid {
+        grid-template-columns: 1fr;
     }
 }

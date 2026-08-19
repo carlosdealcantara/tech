@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // 4. GSAP HORIZONTAL SCROLL (PORTFOLIO)
+    // 4. GSAP HORIZONTAL SCROLL (FULL SITE)
     // =========================================================
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
         console.warn('GSAP not available. Horizontal scroll disabled.');
@@ -94,28 +94,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const portfolioSticky = document.querySelector('.portfolio-sticky');
-    const portfolioTrack  = document.getElementById('portfolio-track');
+    const horizontalContainer = document.querySelector('.horizontal-container');
+    const mainTrack = document.getElementById('main-horizontal-track');
 
-    if (!portfolioSticky || !portfolioTrack) return;
+    if (!horizontalContainer || !mainTrack) return;
 
     // Only on desktop
     let mm = gsap.matchMedia();
     mm.add('(min-width: 769px)', () => {
         // Calculate the exact width we need to slide
         function getScrollAmount() {
-            let trackWidth = portfolioTrack.scrollWidth;
+            let trackWidth = mainTrack.scrollWidth;
             let viewportWidth = window.innerWidth;
             return -(trackWidth - viewportWidth);
         }
 
-        const tween = gsap.to(portfolioTrack, {
+        const tween = gsap.to(mainTrack, {
             x: getScrollAmount,
             ease: 'none'
         });
 
         ScrollTrigger.create({
-            trigger: '.portfolio-container',
+            trigger: '.horizontal-container',
             start: 'top top',
             end: () => `+=${Math.abs(getScrollAmount())}`,
             pin: true,
