@@ -11,8 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     
-    <!-- Flag Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <!-- Hreflang: tells Google these are the same site in two languages -->
+    <link rel="alternate" hreflang="en" href="https://tech.viaei.com/" />
+    <link rel="alternate" hreflang="pt-BR" href="https://tecnologia.viaei.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://tech.viaei.com/" />
 
     <link rel="stylesheet" href="styles.css?v=9">
 
@@ -43,15 +45,7 @@
                 <a href="#portfolio" data-en="Portfolio" data-pt="Portfólio">Portfolio</a>
                 <a href="#about" data-en="About" data-pt="Sobre">About</a>
                 <a href="#contact" class="btn-sm btn-primary" data-en="Contact" data-pt="Contato">Contact</a>
-                <div class="lang-switcher" role="group" aria-label="Language selection">
-                    <button id="lang-btn-en" class="lang-btn active" aria-label="Switch to English">
-                        <span class="fi fi-us"></span> EN
-                    </button>
-                    <span class="lang-divider">|</span>
-                    <button id="lang-btn-pt" class="lang-btn" aria-label="Mudar para Português">
-                        <span class="fi fi-br"></span> PT
-                    </button>
-                </div>
+
             </nav>
             <button class="mobile-menu-btn" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -270,7 +264,7 @@
                         <p data-en="With native-level English fluency, I seamlessly bridge the gap for US-based clients, ensuring crystal-clear communication and zero friction from the first discovery call to final deployment." data-pt="Combinando habilidades técnicas avançadas com comunicação clara, entrego soluções que funcionam no mundo real, sem a complexidade desnecessária.">With native-level English fluency, I seamlessly bridge the gap for US-based clients, ensuring crystal-clear communication and zero friction from the first discovery call to final deployment.</p>
                         <div class="about-stats">
                             <div class="stat-item">
-                                <span class="stat-icon"><span class="fi fi-us"></span></span>
+                                <span class="stat-icon">🇺🇸</span>
                                 <span class="stat-text" data-en="Native-Level English" data-pt="Inglês Fluente / Nativo">Native-Level English</span>
                             </div>
                             <div class="stat-item">
@@ -332,7 +326,7 @@
                 <div class="logo">
                     <span class="logo-name">Carlos de Alcântara</span>
                 </div>
-                <p class="footer-copy">© 2026 tech.viaei.com. All rights reserved.</p>
+                <p class="footer-copy" data-en="© 2026 tech.viaei.com. All rights reserved." data-pt="© 2026 tecnologia.viaei.com. Todos os direitos reservados.">© 2026 tech.viaei.com. All rights reserved.</p>
             </div>
         </div>
     </footer>

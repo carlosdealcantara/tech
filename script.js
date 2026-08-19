@@ -13,44 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================
-    // 1. LANGUAGE LOGIC
+    // 1. LANGUAGE DETECTION (by subdomain — no user toggle)
     // =========================================================
-    const langBtnEn = document.getElementById('lang-btn-en');
-    const langBtnPt = document.getElementById('lang-btn-pt');
+    // 'tecnologia.viaei.com' -> Portuguese | everything else -> English
+    function applyLanguage() {
+        const hostname = window.location.hostname;
+        const lang = hostname.startsWith('tecnologia') ? 'pt' : 'en';
 
-    function switchLanguage(lang) {
-        if (!langBtnEn || !langBtnPt) return;
-
-        // Update button active states
-        langBtnEn.classList.toggle('active', lang === 'en');
-        langBtnPt.classList.toggle('active', lang === 'pt');
-
-        // Update all translatable elements
         document.querySelectorAll('[data-en][data-pt]').forEach(el => {
             el.textContent = el.getAttribute('data-' + lang);
         });
 
-        document.documentElement.lang = lang;
-        sessionStorage.setItem('lang', lang);
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
     }
 
-    // Detect language from URL, then sessionStorage, then default 'en'
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlLang = urlParams.get('lang');
-    const sessionLang = sessionStorage.getItem('lang');
-
-    let initialLang = 'en';
-    if (urlLang === 'pt' || urlLang === 'en') {
-        initialLang = urlLang;
-    } else if (sessionLang === 'pt' || sessionLang === 'en') {
-        initialLang = sessionLang;
-    }
-
-    switchLanguage(initialLang);
-
-    // Each button sets a FIXED language — no toggle
-    if (langBtnEn) langBtnEn.addEventListener('click', () => switchLanguage('en'));
-    if (langBtnPt) langBtnPt.addEventListener('click', () => switchLanguage('pt'));
+    applyLanguage();
 
 
     // =========================================================
