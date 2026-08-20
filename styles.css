@@ -451,14 +451,27 @@ h1, h2, h3, h4 {
     100% { opacity: 0.5; }
 }
 
+/* Allow the services section to expand beyond 100vw */
+.services.horizontal-section {
+    width: max-content;
+    max-width: none;
+    padding-right: 4rem;
+}
+
+/* Align the header but let the container grow to the right */
+.services .container {
+    max-width: none;
+    margin: 0;
+    padding-left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
+}
+
 /* Services — Split layout: header col + cards row */
 .services-layout {
     display: flex;
     align-items: center;
     gap: 3rem;
     height: 100%;
-    width: 100%;
-    min-width: 0;
+    width: max-content;
 }
 
 .services-header-col {
@@ -480,14 +493,12 @@ h1, h2, h3, h4 {
 .services-cards-row {
     display: flex;
     gap: 1.25rem;
-    flex: 1;
     align-items: stretch;
-    min-width: 0;
 }
 
 .service-card {
-    flex: 1;
-    min-width: 0;
+    width: 280px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
