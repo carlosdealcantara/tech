@@ -451,28 +451,80 @@ h1, h2, h3, h4 {
     100% { opacity: 0.5; }
 }
 
-/* Services */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+/* Services — Split layout: header col + cards row */
+.services-layout {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    height: 100%;
+    width: 100%;
 }
 
-.service-card .card-icon {
-    font-size: 2.5rem;
+.services-header-col {
+    flex-shrink: 0;
+    width: 280px;
+    text-align: left;
+}
+
+.services-header-col .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.services-header-col .section-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.services-cards-row {
+    display: flex;
+    gap: 1.25rem;
+    flex: 1;
+    align-items: stretch;
+    min-width: 0;
+}
+
+.service-card {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Icon wrapper replacing emoji */
+.card-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
     margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.service-card:hover .card-icon-wrapper {
+    background: rgba(124, 58, 237, 0.2);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.25);
+    border-color: rgba(124, 58, 237, 0.45);
 }
 
 .service-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
 }
 
 .service-card p {
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
 }
+
 
 .feature-list {
     list-style: none;
@@ -566,7 +618,7 @@ h1, h2, h3, h4 {
 .horizontal-section {
     width: 100vw;
     height: 100vh;
-    overflow-y: auto;
+    overflow: hidden;
     display: flex;
     align-items: center;
     padding: 72px 0 2rem 0; /* Account for navbar */
@@ -880,5 +932,22 @@ h1, h2, h3, h4 {
 
     .portfolio-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Services: revert to vertical stack on mobile */
+    .services-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+        overflow-y: auto;
+    }
+
+    .services-header-col {
+        width: 100%;
+    }
+
+    .services-cards-row {
+        flex-direction: column;
+        width: 100%;
     }
 }

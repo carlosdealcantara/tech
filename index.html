@@ -16,7 +16,7 @@
     <link rel="alternate" hreflang="pt-BR" href="https://tecnologia.viaei.com/" />
     <link rel="alternate" hreflang="x-default" href="https://tech.viaei.com/" />
 
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -89,38 +89,68 @@
 
         <!-- Services Section -->
         <section id="services" class="services horizontal-section">
-            <div class="container">
-                <div class="section-header">
+            <div class="container services-layout">
+
+                <!-- Left col: section header -->
+                <div class="services-header-col">
                     <h2 class="section-title" data-en="How I Can Help" data-pt="Como Posso Ajudar">How I Can Help</h2>
                     <p class="section-desc" data-en="Tailored technology solutions designed to streamline your operations and boost your bottom line." data-pt="Soluções em tecnologia sob medida, desenhadas para otimizar suas operações e aumentar seus lucros.">Tailored technology solutions designed to streamline your operations and boost your bottom line.</p>
                 </div>
 
-                <div class="services-grid">
+                <!-- Right col: 4 cards in a horizontal row -->
+                <div class="services-cards-row">
+
+                    <!-- Card 1: Web Automation & Bots -->
                     <div class="card service-card">
-                        <div class="card-icon">🤖</div>
-                        <h3 data-en="Web Automation & Bots" data-pt="Automação Web e Bots">Web Automation & Bots</h3>
+                        <div class="card-icon-wrapper">
+                            <!-- Terminal / code loop icon -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/>
+                            </svg>
+                        </div>
+                        <h3 data-en="Web Automation &amp; Bots" data-pt="Automação Web e Bots">Web Automation &amp; Bots</h3>
                         <p data-en="Replace repetitive manual tasks with custom software that never sleeps." data-pt="Substitua tarefas manuais repetitivas por software personalizado que nunca dorme.">Replace repetitive manual tasks with custom software that never sleeps.</p>
                         <ul class="feature-list">
                             <li data-en="Customer service automations" data-pt="Automação de atendimento">Customer service automations</li>
                             <li data-en="Automated notification systems" data-pt="Sistemas de notificação">Automated notification systems</li>
-                            <li data-en="Web scraping & data extraction" data-pt="Extração de dados e scraping">Web scraping & data extraction</li>
+                            <li data-en="Web scraping &amp; data extraction" data-pt="Extração de dados e scraping">Web scraping &amp; data extraction</li>
                         </ul>
                     </div>
 
+                    <!-- Card 2: Website Audit & Redesign -->
                     <div class="card service-card">
-                        <div class="card-icon">⚡</div>
-                        <h3 data-en="Website Audit & Redesign" data-pt="Auditoria de Sites e Redesign">Website Audit & Redesign</h3>
+                        <div class="card-icon-wrapper">
+                            <!-- Gauge / speedometer icon -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 2a10 10 0 0 1 7.38 16.74"/>
+                                <path d="M4.62 18.74A10 10 0 0 1 12 2"/>
+                                <circle cx="12" cy="12" r="1"/>
+                                <path d="M12 13V7"/>
+                                <path d="M16.24 7.76l-2.12 2.12"/>
+                            </svg>
+                        </div>
+                        <h3 data-en="Website Audit &amp; Redesign" data-pt="Auditoria de Sites e Redesign">Website Audit &amp; Redesign</h3>
                         <p data-en="Transform your existing website into a high-converting, blazing-fast asset." data-pt="Transforme seu site atual em um ativo de alta conversão e extrema rapidez.">Transform your existing website into a high-converting, blazing-fast asset.</p>
                         <ul class="feature-list">
-                            <li data-en="Technical SEO & performance audits" data-pt="SEO técnico e auditoria de performance">Technical SEO & performance audits</li>
+                            <li data-en="Technical SEO &amp; performance audits" data-pt="SEO técnico e auditoria de performance">Technical SEO & performance audits</li>
                             <li data-en="Conversion rate optimization (CRO)" data-pt="Otimização de conversão (CRO)">Conversion rate optimization (CRO)</li>
                             <li data-en="Modern, premium visual overhauls" data-pt="Redesign visual premium e moderno">Modern, premium visual overhauls</li>
                         </ul>
                     </div>
 
+                    <!-- Card 3: Booking & Lead Capture -->
                     <div class="card service-card">
-                        <div class="card-icon">📅</div>
-                        <h3 data-en="Booking & Lead Capture" data-pt="Agendamento e Captação de Leads">Booking & Lead Capture</h3>
+                        <div class="card-icon-wrapper">
+                            <!-- Funnel / lead capture icon -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22 3H2l8 9.46V19l4 2v-8.54z"/>
+                                <circle cx="18" cy="18" r="3"/>
+                                <path d="M18 15v3h3"/>
+                            </svg>
+                        </div>
+                        <h3 data-en="Booking &amp; Lead Capture" data-pt="Agendamento e Captação de Leads">Booking & Lead Capture</h3>
                         <p data-en="Seamless systems to turn your website visitors into qualified leads and booked appointments." data-pt="Sistemas fluidos para transformar visitantes em leads qualificados e agendamentos.">Seamless systems to turn your website visitors into qualified leads and booked appointments.</p>
                         <ul class="feature-list">
                             <li data-en="Automated scheduling funnels" data-pt="Funis de agendamento automáticos">Automated scheduling funnels</li>
@@ -129,8 +159,18 @@
                         </ul>
                     </div>
 
+                    <!-- Card 4: AI-Powered Workflows -->
                     <div class="card service-card">
-                        <div class="card-icon">🧠</div>
+                        <div class="card-icon-wrapper">
+                            <!-- Neural network / AI icon -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="5" r="2"/>
+                                <circle cx="5" cy="19" r="2"/>
+                                <circle cx="19" cy="19" r="2"/>
+                                <circle cx="12" cy="14" r="2"/>
+                                <path d="M12 7v5M12 16v0M10.3 13.1 6.7 17.3M13.7 13.1l3.6 4.2"/>
+                            </svg>
+                        </div>
                         <h3 data-en="AI-Powered Workflows" data-pt="Workflows com Inteligência Artificial">AI-Powered Workflows</h3>
                         <p data-en="Leverage cutting-edge AI to handle complex processing faster and cheaper than ever before." data-pt="Utilize IA de ponta para lidar com processamentos complexos de forma rápida e barata.">Leverage cutting-edge AI to handle complex processing faster and cheaper than ever before.</p>
                         <ul class="feature-list">
@@ -139,8 +179,9 @@
                             <li data-en="Custom AI agent integrations" data-pt="Integração de agentes IA personalizados">Custom AI agent integrations</li>
                         </ul>
                     </div>
-                </div>
-            </div>
+
+                </div><!-- /services-cards-row -->
+            </div><!-- /container -->
         </section>
 
         <!-- Process Section -->
