@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             el.textContent = el.getAttribute('data-' + lang);
         });
 
+        document.querySelectorAll('[data-placeholder-en][data-placeholder-pt]').forEach(el => {
+            el.placeholder = el.getAttribute('data-placeholder-' + lang);
+        });
+
         document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
     }
 
@@ -157,10 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } finally {
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
-                
-                setTimeout(() => {
-                    formStatus.style.display = 'none';
-                }, 5000);
             }
         });
     }
