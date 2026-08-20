@@ -115,4 +115,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // =========================================================
+    // 5. AJAX FORM SUBMISSION
+    // =========================================================
+    const contactForm = document.querySelector('.contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm && formStatus) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            const lang = document.documentElement.lang;
+            submitBtn.innerHTML = lang === 'pt-BR' ? 'Enviando...' : 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    contactForm.reset();
+                    formStatus.style.display = 'block';
+                    formStatus.style.color = '#4CAF50'; // Green
+                    formStatus.innerHTML = lang === 'pt-BR' ? 'Mensagem enviada com sucesso! Retornarei em breve.' : 'Message sent successfully! I will get back to you soon.';
+                } else {
+                    formStatus.style.display = 'block';
+                    formStatus.style.color = '#F44336'; // Red
+                    formStatus.innerHTML = lang === 'pt-BR' ? 'Ocorreu um erro ao enviar. Tente novamente.' : 'Oops! There was a problem submitting your form.';
+                }
+            } catch (error) {
+                formStatus.style.display = 'block';
+                formStatus.style.color = '#F44336';
+                formStatus.innerHTML = lang === 'pt-BR' ? 'Erro de conexão. Verifique sua internet.' : 'Connection error. Please check your internet.';
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }
+        });
+    }
+
 });
