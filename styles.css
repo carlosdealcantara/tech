@@ -74,6 +74,7 @@
 
 html {
     /* scroll-behavior: smooth removed — incompatible with GSAP ScrollTrigger */
+    overflow-anchor: none;
 }
 
 body {
