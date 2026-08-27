@@ -93,22 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // --- CASE 2: Vertical sections (e.g. #contact) on desktop ---
             else if (isDesktop && st) {
-                // IMPORTANT: Do NOT use offsetTop or getAbsoluteTop() here.
-                // GSAP inserts a huge "pin-spacer" div into the DOM when it pins
-                // the horizontal container. This pin-spacer has a height equal to
-                // the full horizontal scroll distance (e.g. 4× viewport width),
-                // which completely corrupts any offsetParent-based calculation.
-                //
-                // The correct approach: #contact begins IMMEDIATELY after the
-                // horizontal pin ends. So scrolling to `st.end` (the pixel value
-                // where the pin finishes) lands us exactly at the top of #contact.
-                //
-                // If there are multiple vertical sections below, add the element's
-                // offsetTop relative to the first vertical section as a delta.
-                const pinEnd = st.end;
-                const contactSection = document.querySelector('.vertical-section');
-                const relativeOffset = contactSection ? (target.offsetTop - contactSection.offsetTop) : 0;
-                gsap.to(window, { scrollTo: pinEnd + Math.max(0, relativeOffset), duration: 1, ease: 'power2.inOut' });
+                // To get to the contact section, we need its actual Y coordinate in the document.
+                // Since horizontal sections are now properly syncing scroll, the GSAP pin-spacer
+                // will push this section down by the exact right amount.
+                const targetY = target.getBoundingClientRect().top + window.scrollY;
+                gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
             }
             // --- CASE 3: Mobile (no horizontal scroll, normal vertical layout) ---
             else {
