@@ -232,6 +232,14 @@ h1, h2, h3, h4 {
 .logo {
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 .logo-name {
@@ -625,6 +633,7 @@ h1, h2, h3, h4 {
     height: 100vh;
     width: max-content;
     will-change: transform;
+    position: relative;
 }
 
 .horizontal-section {

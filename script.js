@@ -58,21 +58,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // =========================================================
-    // 3. SMOOTH SCROLL FOR ANCHOR LINKS
-    // =========================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (!targetId || targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
-                if (window.innerWidth <= 768 && navLinks) {
-                    navLinks.style.display = 'none';
-                }
+
+            // Logo / back-to-top link
+            if (!targetId || targetId === '#') {
+                gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.inOut' });
+                if (window.innerWidth <= 768 && navLinks) navLinks.style.display = 'none';
+                return;
             }
+
+            const target = document.querySelector(targetId);
+            if (!target) return;
+
+            const st = window.horizontalScrollTrigger;
+            const isDesktop = window.innerWidth > 768;
+
+            // --- CASE 1: Horizontal sections on desktop ---
+            if (
+                target.classList.contains('horizontal-section') &&
+                isDesktop &&
+                st
+            ) {
+                // ScrollTrigger maps its scroll range 1:1 to the track's translateX distance.
+                // The trigger starts at `st.start` pixels of page scroll.
+                // Each section's offsetLeft inside the track equals the required X translation,
+                // which in turn equals the required scroll offset from `st.start`.
+                // We force a refresh first to ensure st.start is accurate after any layout shift.
+                ScrollTrigger.refresh();
+                const targetY = st.start + target.offsetLeft;
+                gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
+            }
+            // --- CASE 2: Vertical sections (e.g. #contact) on desktop ---
+            else if (isDesktop && st) {
+                // IMPORTANT: Do NOT use offsetTop or getAbsoluteTop() here.
+                // GSAP inserts a huge "pin-spacer" div into the DOM when it pins
+                // the horizontal container. This pin-spacer has a height equal to
+                // the full horizontal scroll distance (e.g. 4× viewport width),
+                // which completely corrupts any offsetParent-based calculation.
+                //
+                // The correct approach: #contact begins IMMEDIATELY after the
+                // horizontal pin ends. So scrolling to `st.end` (the pixel value
+                // where the pin finishes) lands us exactly at the top of #contact.
+                //
+                // If there are multiple vertical sections below, add the element's
+                // offsetTop relative to the first vertical section as a delta.
+                const pinEnd = st.end;
+                const contactSection = document.querySelector('.vertical-section');
+                const relativeOffset = contactSection ? (target.offsetTop - contactSection.offsetTop) : 0;
+                gsap.to(window, { scrollTo: pinEnd + Math.max(0, relativeOffset), duration: 1, ease: 'power2.inOut' });
+            }
+            // --- CASE 3: Mobile (no horizontal scroll, normal vertical layout) ---
+            else {
+                gsap.to(window, { scrollTo: { y: target, offsetY: 72 }, duration: 1, ease: 'power2.inOut' });
+            }
+
+            if (window.innerWidth <= 768 && navLinks) navLinks.style.display = 'none';
         });
     });
 
@@ -107,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'none'
         });
 
-        ScrollTrigger.create({
+        window.horizontalScrollTrigger = ScrollTrigger.create({
             trigger: '.horizontal-container',
             start: 'top top',
             end: () => `+=${Math.abs(getScrollAmount())}`,
