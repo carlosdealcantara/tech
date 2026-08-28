@@ -682,6 +682,8 @@ h1, h2, h3, h4 {
 
 .portfolio-swiper {
     padding-bottom: 3rem !important; /* space for pagination */
+    width: 900px; /* Bounded width for horizontal GSAP layout */
+    max-width: 100vw;
 }
 .portfolio-swiper .swiper-pagination-bullet {
     background: var(--text-muted);
@@ -1033,6 +1035,10 @@ h1, h2, h3, h4 {
 
     .portfolio .section-header {
         width: 100%;
+    }
+
+    .portfolio-swiper {
+        width: calc(100vw - 4rem);
     }
 
     /* Swiper handles horizontal swiping on mobile for portfolio */
