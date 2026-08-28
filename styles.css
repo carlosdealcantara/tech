@@ -656,13 +656,39 @@ h1, h2, h3, h4 {
     padding: 8rem 0;
 }
 
+/* Portfolio Horizontal Carousel Layout */
+.portfolio.horizontal-section {
+    width: max-content;
+    max-width: none;
+    padding-right: 4rem;
+}
+
+.portfolio .container {
+    max-width: none;
+    margin: 0;
+    padding-left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    height: 100%;
+}
+
+.portfolio .section-header {
+    width: 280px;
+    flex-shrink: 0;
+    text-align: left;
+    margin: 0;
+}
+
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: 2rem;
+    align-items: stretch;
 }
 
 .project-card {
+    width: 420px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
@@ -991,8 +1017,24 @@ h1, h2, h3, h4 {
         padding: 5rem 0; /* Normal vertical section padding */
     }
 
+    .portfolio .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 2rem;
+        gap: 2rem;
+    }
+
+    .portfolio .section-header {
+        width: 100%;
+    }
+
     .portfolio-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .project-card {
+        width: 100%;
     }
 
     /* Services: revert to vertical stack on mobile */
