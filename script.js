@@ -203,4 +203,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // =========================================================
+    // 6. PORTFOLIO SWIPER
+    // =========================================================
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.portfolio-swiper', {
+            loop: false,
+            slidesPerView: 1.1,
+            centeredSlides: false,
+            spaceBetween: 20,
+            speed: 800,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
+            navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
+            breakpoints: {
+                768: { slidesPerView: 2.2, spaceBetween: 30 }
+            }
+        });
+    }
+
 });

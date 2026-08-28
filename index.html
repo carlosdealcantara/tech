@@ -16,13 +16,16 @@
     <link rel="alternate" hreflang="pt-BR" href="https://tecnologia.viaei.com/" />
     <link rel="alternate" hreflang="x-default" href="https://tech.viaei.com/" />
 
-    <link rel="stylesheet" href="styles.css?v=17">
+    <link rel="stylesheet" href="styles.css?v=18">
 
 
     <!-- GSAP + ScrollTrigger + ScrollToPlugin -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
     <!-- Preloader -->
@@ -230,67 +233,90 @@
                     <p class="section-desc" data-en="Technical demonstrations and systems engineered for performance." data-pt="Demonstrações técnicas e sistemas projetados para alta performance.">Technical demonstrations and systems engineered for performance.</p>
                 </div>
 
-                <div class="portfolio-grid">
-                    <!-- Card 1: Viaei -->
-                    <div class="card project-card">
-                            <div class="project-image-wrapper">
-                                <img src="assets/viaei.jpg" alt="Viaei Community Screenshot" class="project-screenshot">
-                            </div>
-                            <div class="project-tag">Ecosystem & Automation</div>
-                            <h3 class="project-title" data-en="Viaei Community & WhatsApp Engine" data-pt="Comunidade Viaei & Motor WhatsApp">Viaei Community & WhatsApp Engine</h3>
-                            <p class="project-desc" data-en="International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%." data-pt="Comunidade internacional de trocas culturais com banco de dados inteligente e cronograma em tempo real. Integrada a um motor autônomo de WhatsApp que reduziu o tempo de resposta manual em 90%.">International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%.</p>
-                            <div class="project-tech">
-                                <span>Smart DB</span>
-                                <span>Dynamic Routing</span>
-                                <span>Baileys/Node.js</span>
-                            </div>
-                            <div class="project-link-wrapper">
-                                <a href="https://viaei.com" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                <div class="swiper portfolio-swiper" style="width: 100%; padding-bottom: 3rem;">
+                    <div class="swiper-wrapper portfolio-grid">
+                        <!-- Card 1: Viaei -->
+                        <div class="swiper-slide">
+                            <div class="card project-card">
+                                <div class="project-image-wrapper">
+                                    <img src="assets/viaei.jpg" alt="Viaei Community Screenshot" class="project-screenshot" style="object-position: center 20%;">
+                                </div>
+                                <div class="project-tag">Ecosystem & Automation</div>
+                                <h3 class="project-title" data-en="Viaei Community & WhatsApp Engine" data-pt="Comunidade Viaei & Motor WhatsApp">Viaei Community & WhatsApp Engine</h3>
+                                <p class="project-desc" data-en="International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%." data-pt="Comunidade internacional de trocas culturais com banco de dados inteligente e cronograma em tempo real. Integrada a um motor autônomo de WhatsApp que reduziu o tempo de resposta manual em 90%.">International cultural exchange community powered by a smart database and dynamic real-time scheduling. Integrated with an autonomous WhatsApp engine that reduced manual response time by 90%.</p>
+                                <div class="project-tech">
+                                    <span>Smart DB</span>
+                                    <span>Dynamic Routing</span>
+                                    <span>Baileys/Node.js</span>
+                                </div>
+                                <div class="project-link-wrapper">
+                                    <a href="https://viaei.com" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 2: GovCondominial -->
-                        <div class="card project-card">
-                            <div class="project-tag">Corporate Portal</div>
-                            <h3 class="project-title">GovCondominial</h3>
-                            <p class="project-desc" data-en="A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation." data-pt="Um portal profissional e de gestão para administração de condomínios, focado em confiança, arquitetura de informação clara e geração de leads.">A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation.</p>
-                            <div class="project-tech">
-                                <span>Web Design</span>
-                                <span>Lead Capture</span>
-                            </div>
-                            <div class="project-link-wrapper">
-                                <a href="https://viaei.com/govcondominial/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                        <div class="swiper-slide">
+                            <div class="card project-card">
+                                <div class="project-image-wrapper">
+                                    <img src="assets/govcondominial.jpg" alt="GovCondominial Screenshot" class="project-screenshot" style="object-position: center top;">
+                                </div>
+                                <div class="project-tag">Corporate Portal</div>
+                                <h3 class="project-title">GovCondominial</h3>
+                                <p class="project-desc" data-en="A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation." data-pt="Um portal profissional e de gestão para administração de condomínios, focado em confiança, arquitetura de informação clara e geração de leads.">A professional presence and management portal for condominium administration, focusing on trust, clear information architecture, and lead generation.</p>
+                                <div class="project-tech">
+                                    <span>Web Design</span>
+                                    <span>Lead Capture</span>
+                                </div>
+                                <div class="project-link-wrapper">
+                                    <a href="https://viaei.com/govcondominial/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 3: Varejão Araújo -->
-                        <div class="card project-card">
-                            <div class="project-tag">E-Commerce & Retail</div>
-                            <h3 class="project-title">Varejão Araújo</h3>
-                            <p class="project-desc" data-en="A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO." data-pt="Uma vitrine digital para um mercado local, otimizando a jornada do cliente da descoberta à entrega. Foco em alta performance e SEO local.">A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO.</p>
-                            <div class="project-tech">
-                                <span>Retail UI/UX</span>
-                                <span>Local SEO</span>
-                            </div>
-                            <div class="project-link-wrapper">
-                                <a href="https://dev.viaei.com/varejaoaraujodi/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                        <div class="swiper-slide">
+                            <div class="card project-card">
+                                <div class="project-image-wrapper">
+                                    <img src="assets/varejaodi.jpg" alt="Varejão Araújo Screenshot" class="project-screenshot" style="object-position: center top;">
+                                </div>
+                                <div class="project-tag">E-Commerce & Retail</div>
+                                <h3 class="project-title">Varejão Araújo</h3>
+                                <p class="project-desc" data-en="A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO." data-pt="Uma vitrine digital para um mercado local, otimizando a jornada do cliente da descoberta à entrega. Foco em alta performance e SEO local.">A digital storefront for a local retail market, optimizing the customer journey from discovery to delivery. Focus on high performance and local SEO.</p>
+                                <div class="project-tech">
+                                    <span>Retail UI/UX</span>
+                                    <span>Local SEO</span>
+                                </div>
+                                <div class="project-link-wrapper">
+                                    <a href="https://dev.viaei.com/varejaoaraujodi/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Card 4: Multiversom -->
-                        <div class="card project-card">
-                            <div class="project-tag">Artist Portfolio</div>
-                            <h3 class="project-title">Multiversom</h3>
-                            <p class="project-desc" data-en="A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience." data-pt="Um portfólio altamente estético e customizado para um músico. Conta com integração de mídia rica, agenda de eventos e uma experiência de usuário imersiva.">A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience.</p>
-                            <div class="project-tech">
-                                <span>Rich Media</span>
-                                <span>Custom Design</span>
-                            </div>
-                            <div class="project-link-wrapper">
-                                <a href="https://multiversom.viaei.com/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                        <div class="swiper-slide">
+                            <div class="card project-card">
+                                <div class="project-image-wrapper">
+                                    <img src="assets/multiversom.jpg" alt="Multiversom Screenshot" class="project-screenshot" style="object-position: center 10%;">
+                                </div>
+                                <div class="project-tag">Artist Portfolio</div>
+                                <h3 class="project-title">Multiversom</h3>
+                                <p class="project-desc" data-en="A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience." data-pt="Um portfólio altamente estético e customizado para um músico. Conta com integração de mídia rica, agenda de eventos e uma experiência de usuário imersiva.">A highly aesthetic, customized portfolio site for a musician. Features rich media integration, event schedules, and an immersive user experience.</p>
+                                <div class="project-tech">
+                                    <span>Rich Media</span>
+                                    <span>Custom Design</span>
+                                </div>
+                                <div class="project-link-wrapper">
+                                    <a href="https://multiversom.viaei.com/" target="_blank" rel="noopener" class="btn-outline btn-sm">Visit Project</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Swiper Controls -->
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
                 </div>
         </section>
 
@@ -375,8 +401,8 @@
         </div>
     </footer>
 
-    <script src="script.js?v=17"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js?v=18"></script>
 
 </body>
 </html>

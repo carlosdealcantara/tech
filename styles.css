@@ -680,15 +680,22 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
-.portfolio-grid {
-    display: flex;
-    gap: 2rem;
-    align-items: stretch;
+.portfolio-swiper {
+    padding-bottom: 3rem !important; /* space for pagination */
+}
+.portfolio-swiper .swiper-pagination-bullet {
+    background: var(--text-muted);
+}
+.portfolio-swiper .swiper-pagination-bullet-active {
+    background: var(--primary);
+}
+.portfolio-swiper .swiper-button-next,
+.portfolio-swiper .swiper-button-prev {
+    color: var(--primary);
 }
 
 .project-card {
-    width: 420px;
-    flex-shrink: 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -1028,14 +1035,7 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 
-    .portfolio-grid {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .project-card {
-        width: 100%;
-    }
+    /* Swiper handles horizontal swiping on mobile for portfolio */
 
     /* Services: revert to vertical stack on mobile */
     .services-layout {
