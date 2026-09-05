@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             centeredSlides: false,
             spaceBetween: 20,
             speed: 800,
-            autoplay: { delay: 4000, disableOnInteraction: false },
+            autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
             pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
             navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
             breakpoints: {

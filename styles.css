@@ -677,16 +677,23 @@ h1, h2, h3, h4 {
     min-width: 0;
     flex-grow: 1;
 }
+/* Pagination and nav buttons sit on the same row, vertically centered */
 .portfolio-swiper .swiper-pagination {
-    bottom: 0.5rem;
+    bottom: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 .portfolio-swiper .swiper-pagination-bullet {
     background: var(--text-muted);
+    margin: 0 !important;
 }
 .portfolio-swiper .swiper-pagination-bullet-active {
     background: var(--primary);
 }
-/* Move nav buttons to bottom, flanking the pagination */
+/* Nav buttons aligned to same bottom strip as pagination */
 .portfolio-swiper .swiper-button-prev,
 .portfolio-swiper .swiper-button-next {
     color: var(--primary);
@@ -694,6 +701,10 @@ h1, h2, h3, h4 {
     bottom: 0;
     width: 2rem;
     height: 2rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .portfolio-swiper .swiper-button-prev {
     left: calc(50% - 80px);
@@ -704,6 +715,7 @@ h1, h2, h3, h4 {
 .portfolio-swiper .swiper-button-prev::after,
 .portfolio-swiper .swiper-button-next::after {
     font-size: 1rem;
+    line-height: 1;
 }
 
 .portfolio-swiper .swiper-slide {
@@ -778,10 +790,6 @@ h1, h2, h3, h4 {
     flex-grow: 1; /* Pushes the tech tags and buttons down */
     font-size: 0.8rem;
     line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 .project-tech {
