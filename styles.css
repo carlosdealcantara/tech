@@ -677,10 +677,11 @@ h1, h2, h3, h4 {
     min-width: 0;
     flex-grow: 1;
 }
-/* Pagination and nav buttons sit on the same row, vertically centered */
+/* Pagination and nav buttons — all anchored to bottom: 0.5rem, height: 1.5rem */
 .portfolio-swiper .swiper-pagination {
-    bottom: 0;
-    height: 2rem;
+    bottom: 0.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -689,33 +690,32 @@ h1, h2, h3, h4 {
 .portfolio-swiper .swiper-pagination-bullet {
     background: var(--text-muted);
     margin: 0 !important;
+    flex-shrink: 0;
 }
 .portfolio-swiper .swiper-pagination-bullet-active {
     background: var(--primary);
 }
-/* Nav buttons aligned to same bottom strip as pagination */
+/* Nav buttons anchored to the exact same strip */
 .portfolio-swiper .swiper-button-prev,
 .portfolio-swiper .swiper-button-next {
     color: var(--primary);
     top: auto;
-    bottom: 0;
-    width: 2rem;
-    height: 2rem;
+    bottom: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .portfolio-swiper .swiper-button-prev {
-    left: calc(50% - 80px);
+    left: calc(50% - 72px);
 }
 .portfolio-swiper .swiper-button-next {
-    right: calc(50% - 80px);
+    right: calc(50% - 72px);
 }
 .portfolio-swiper .swiper-button-prev::after,
 .portfolio-swiper .swiper-button-next::after {
-    font-size: 1rem;
-    line-height: 1;
+    font-size: 0.85rem;
+    line-height: 1.5rem;
+    display: block;
 }
 
 .portfolio-swiper .swiper-slide {
