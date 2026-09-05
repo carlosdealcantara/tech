@@ -753,7 +753,7 @@ h1, h2, h3, h4 {
 
 .project-screenshot {
     width: 100%;
-    aspect-ratio: 4/3; /* 4/3 strikes the best balance between height and not cutting off the image */
+    aspect-ratio: 4/5; /* Portrait aspect ratio to show more vertical content of the screenshots */
     display: block;
     border-radius: 8px 8px 0 0;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.3);

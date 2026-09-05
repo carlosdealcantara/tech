@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
             breakpoints: {
                 640: { slidesPerView: 1.5, spaceBetween: 20 },
-                1024: { slidesPerView: 2, spaceBetween: 40 }
+                1024: { slidesPerView: 3, spaceBetween: 30 }
             }
         });
     }
