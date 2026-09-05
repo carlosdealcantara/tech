@@ -208,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     if (typeof Swiper !== 'undefined') {
         new Swiper('.portfolio-swiper', {
-            loop: false,
-            slidesPerView: 1.1,
+            loop: true,
+            slidesPerView: 1.2,
             centeredSlides: false,
             spaceBetween: 20,
             speed: 800,
@@ -217,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
             navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
             breakpoints: {
-                768: { slidesPerView: 2.2, spaceBetween: 30 }
+                768: { slidesPerView: 2.2, spaceBetween: 30 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
             }
         });
     }
