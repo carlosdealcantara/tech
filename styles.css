@@ -753,7 +753,7 @@ h1, h2, h3, h4 {
 
 .project-screenshot {
     width: 100%;
-    aspect-ratio: 4/3; /* Taller image ratio to give more visual weight */
+    aspect-ratio: 1/1; /* Square image ratio to maximize visual impact */
     display: block;
     border-radius: 8px 8px 0 0;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
@@ -790,6 +790,10 @@ h1, h2, h3, h4 {
     flex-grow: 1; /* Pushes the tech tags and buttons down */
     font-size: 0.8rem;
     line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Force exactly 2 lines maximum */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .project-tech {
