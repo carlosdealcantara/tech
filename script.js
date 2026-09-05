@@ -217,8 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
             navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
             breakpoints: {
-                768: { slidesPerView: 2.2, spaceBetween: 30 },
-                1024: { slidesPerView: 3, spaceBetween: 30 }
+                640: { slidesPerView: 1.5, spaceBetween: 20 },
+                1024: { slidesPerView: 2, spaceBetween: 40 }
             }
         });
     }
