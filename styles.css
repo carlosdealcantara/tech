@@ -692,9 +692,13 @@ h1, h2, h3, h4 {
     background: var(--text-muted);
     margin: 0 !important;
     flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    transition: all 0.3s ease;
 }
 .portfolio-swiper .swiper-pagination-bullet-active {
     background: var(--primary);
+    transform: scale(1.2);
 }
 /* Nav buttons anchored to the exact same strip */
 .portfolio-swiper .swiper-button-prev,
@@ -702,21 +706,22 @@ h1, h2, h3, h4 {
     color: var(--primary);
     top: auto;
     bottom: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     margin-top: 0;
 }
 .portfolio-swiper .swiper-button-prev {
-    left: calc(50% - 72px);
+    left: calc(50% - 85px); /* Adjusted to accommodate wider arrows */
 }
 .portfolio-swiper .swiper-button-next {
-    right: calc(50% - 72px);
+    right: calc(50% - 85px);
 }
 .portfolio-swiper .swiper-button-prev::after,
 .portfolio-swiper .swiper-button-next::after {
-    font-size: 0.85rem;
-    line-height: 1.5rem;
+    font-size: 1.15rem; /* Larger arrow icons */
+    line-height: 2rem;
     display: block;
+    font-weight: 800;
 }
 
 .portfolio-swiper .swiper-slide {
