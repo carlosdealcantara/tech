@@ -681,12 +681,12 @@ h1, h2, h3, h4 {
 /* Pagination and nav buttons — all anchored to bottom: 0.5rem, height: 1.5rem */
 .portfolio-swiper .swiper-pagination {
     bottom: 0.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 2rem;
+    line-height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
 }
 .portfolio-swiper .swiper-pagination-bullet {
     background: var(--text-muted);
