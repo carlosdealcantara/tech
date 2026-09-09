@@ -693,11 +693,29 @@ h1, h2, h3, h4 {
     min-width: 0;
     flex-grow: 1;
 }
-/* Pagination and nav buttons — all anchored to bottom: 0.5rem, height: 1.5rem */
+/* =====================================================
+   Connected three-piece carousel control bar
+   [ ← ] [  ● ● ● ●  ] [ → ]
+   All three pieces share the same height and glass look,
+   flush borders create a single cohesive control card.
+   ===================================================== */
+
+/* Center piece: pagination dots */
 .portfolio-swiper .swiper-pagination {
-    bottom: 0.5rem;
-    height: 2rem;
-    line-height: 2rem;
+    bottom: 0;
+    height: 3rem;
+    line-height: 3rem;
+    width: 130px; /* fixed so flanking buttons align exactly */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -707,22 +725,24 @@ h1, h2, h3, h4 {
     background: var(--text-muted);
     margin: 0 !important;
     flex-shrink: 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
+    opacity: 1;
     transition: all 0.3s ease;
 }
 .portfolio-swiper .swiper-pagination-bullet-active {
     background: var(--primary);
-    transform: scale(1.2);
+    width: 20px;
+    border-radius: 4px;
 }
-/* Nav buttons as mini-cards anchored to the same strip */
+
+/* Left and right pieces: arrow buttons — flush against center */
 .portfolio-swiper .swiper-button-prev,
 .portfolio-swiper .swiper-button-next {
     color: var(--text-main);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(12px);
-    border-radius: 12px;
     top: auto;
     bottom: 0;
     width: 3rem;
@@ -734,24 +754,30 @@ h1, h2, h3, h4 {
     justify-content: center;
 }
 
+/* Hover: only the hovered button lifts, keeping cohesion */
 .portfolio-swiper .swiper-button-prev:hover,
 .portfolio-swiper .swiper-button-next:hover {
     background: var(--bg-card-hover);
     border-color: var(--border-highlight);
     color: #a78bfa;
-    transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Left button: rounded on the left only, no right border */
 .portfolio-swiper .swiper-button-prev {
-    left: calc(50% - 110px); /* Adjusted to accommodate wider buttons */
+    left: calc(50% - 65px - 3rem); /* 65px = half of 130px pagination */
+    border-radius: 12px 0 0 12px;
+    border-right: none;
 }
+/* Right button: rounded on the right only, no left border */
 .portfolio-swiper .swiper-button-next {
-    right: calc(50% - 110px);
+    right: calc(50% - 65px - 3rem);
+    border-radius: 0 12px 12px 0;
+    border-left: none;
 }
 .portfolio-swiper .swiper-button-prev::after,
 .portfolio-swiper .swiper-button-next::after {
-    font-size: 1.15rem; /* Appropriate size inside the 3rem button */
+    font-size: 1rem;
     line-height: 1;
     display: block;
     font-weight: 800;
@@ -786,22 +812,25 @@ h1, h2, h3, h4 {
 
 .project-screenshot {
     width: 100%;
-    aspect-ratio: 4/5; /* Mobile aspect ratio */
+    aspect-ratio: 4/5;
     display: block;
     border-radius: 0;
-    object-fit: cover;
-    object-position: top;
+    /* contain: respects original image proportions without distortion.
+       Empty side strips will show the dark wrapper background. */
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.6s ease;
+    background: rgba(12, 12, 18, 0.95); /* fills letterbox areas */
 }
 
 @media (min-width: 1024px) {
     .project-screenshot {
-        aspect-ratio: 3/4; /* Taller on desktop */
+        aspect-ratio: 3/4;
     }
 }
 
 .project-card:hover .project-screenshot {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.03);
 }
 
 .project-tag {
