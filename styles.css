@@ -715,26 +715,44 @@ h1, h2, h3, h4 {
     background: var(--primary);
     transform: scale(1.2);
 }
-/* Nav buttons anchored to the exact same strip */
+/* Nav buttons as mini-cards anchored to the same strip */
 .portfolio-swiper .swiper-button-prev,
 .portfolio-swiper .swiper-button-next {
-    color: var(--primary);
+    color: var(--text-main);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
     top: auto;
-    bottom: 0.5rem;
-    width: 2rem;
-    height: 2rem;
+    bottom: 0;
+    width: 3rem;
+    height: 3rem;
     margin-top: 0;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.portfolio-swiper .swiper-button-prev:hover,
+.portfolio-swiper .swiper-button-next:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-highlight);
+    color: #a78bfa;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
 .portfolio-swiper .swiper-button-prev {
-    left: calc(50% - 85px); /* Adjusted to accommodate wider arrows */
+    left: calc(50% - 110px); /* Adjusted to accommodate wider buttons */
 }
 .portfolio-swiper .swiper-button-next {
-    right: calc(50% - 85px);
+    right: calc(50% - 110px);
 }
 .portfolio-swiper .swiper-button-prev::after,
 .portfolio-swiper .swiper-button-next::after {
-    font-size: 1.15rem; /* Larger arrow icons */
-    line-height: 2rem;
+    font-size: 1.15rem; /* Appropriate size inside the 3rem button */
+    line-height: 1;
     display: block;
     font-weight: 800;
 }
