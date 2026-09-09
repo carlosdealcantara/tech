@@ -530,16 +530,34 @@ h1, h2, h3, h4 {
     overflow: hidden;
 }
 
-.impact-img-wrap img {
+.impact-img-wrap .img-before,
+.impact-img-wrap .img-after {
+    position: absolute;
+    top: 0; left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(40%);
-    transition: filter 0.4s ease;
+    transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
-.impact-panel:hover .impact-img-wrap img {
+/* Default: show before image (grayscale), hide after */
+.impact-img-wrap .img-before {
+    opacity: 1;
+    filter: grayscale(40%);
+}
+
+.impact-img-wrap .img-after {
+    opacity: 0;
     filter: grayscale(0%);
+}
+
+/* On hover: fade out before, fade in after (full color) */
+.impact-panel:hover .img-before {
+    opacity: 0;
+}
+
+.impact-panel:hover .img-after {
+    opacity: 1;
 }
 
 .impact-content {
