@@ -696,19 +696,20 @@ h1, h2, h3, h4 {
 /* =====================================================
    Connected three-piece carousel control bar
    [ ← ] [  ● ● ● ●  ] [ → ]
-   All three pieces share the same height and glass look,
-   flush borders create a single cohesive control card.
+   !important needed to override Swiper's own injected CSS.
    ===================================================== */
 
 /* Center piece: pagination dots */
 .portfolio-swiper .swiper-pagination {
-    bottom: 0;
-    height: 3rem;
+    position: absolute !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: 130px !important;
+    height: 3rem !important;
     line-height: 3rem;
-    width: 130px; /* fixed so flanking buttons align exactly */
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
     background: var(--bg-card);
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
@@ -716,7 +717,7 @@ h1, h2, h3, h4 {
     border-right: none;
     border-radius: 0;
     backdrop-filter: blur(12px);
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -725,14 +726,15 @@ h1, h2, h3, h4 {
     background: var(--text-muted);
     margin: 0 !important;
     flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    opacity: 1;
+    width: 8px !important;
+    height: 8px !important;
+    opacity: 1 !important;
+    border-radius: 4px;
     transition: all 0.3s ease;
 }
 .portfolio-swiper .swiper-pagination-bullet-active {
-    background: var(--primary);
-    width: 20px;
+    background: var(--primary) !important;
+    width: 20px !important;
     border-radius: 4px;
 }
 
@@ -743,10 +745,10 @@ h1, h2, h3, h4 {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(12px);
-    top: auto;
-    bottom: 0;
-    width: 3rem;
-    height: 3rem;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 48px !important; /* 3rem at 16px base = 48px, explicit for calc() */
+    height: 3rem !important;
     margin-top: 0;
     transition: var(--transition);
     display: flex;
@@ -754,7 +756,7 @@ h1, h2, h3, h4 {
     justify-content: center;
 }
 
-/* Hover: only the hovered button lifts, keeping cohesion */
+/* Hover */
 .portfolio-swiper .swiper-button-prev:hover,
 .portfolio-swiper .swiper-button-next:hover {
     background: var(--bg-card-hover);
@@ -763,15 +765,17 @@ h1, h2, h3, h4 {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Left button: rounded on the left only, no right border */
+/* Left button: rounded left, no right border — sits flush against center */
 .portfolio-swiper .swiper-button-prev {
-    left: calc(50% - 65px - 3rem); /* 65px = half of 130px pagination */
+    left: calc(50% - 65px - 48px) !important; /* 65px = half of 130px pagination */
+    right: auto !important;
     border-radius: 12px 0 0 12px;
     border-right: none;
 }
-/* Right button: rounded on the right only, no left border */
+/* Right button: rounded right, no left border — sits flush against center */
 .portfolio-swiper .swiper-button-next {
-    right: calc(50% - 65px - 3rem);
+    right: calc(50% - 65px - 48px) !important;
+    left: auto !important;
     border-radius: 0 12px 12px 0;
     border-left: none;
 }
