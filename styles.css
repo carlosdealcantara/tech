@@ -335,17 +335,22 @@ h1, h2, h3, h4 {
 
 .mobile-menu-btn {
     display: none;
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
     flex-direction: column;
-    gap: 4px;
+    justify-content: center;
+    gap: 5px;
+    padding: 0.5rem;
+    z-index: 9999;
 }
 
 .mobile-menu-btn span {
-    width: 24px;
+    display: block;
+    width: 28px;
     height: 2px;
-    background: var(--text-main);
+    background-color: #f8fafc; /* hardcode white to guarantee visibility */
+    border-radius: 2px;
     transition: var(--transition);
 }
 
