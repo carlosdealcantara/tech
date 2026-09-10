@@ -232,4 +232,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // =========================================================
+    // 7. ACTIVE MENU STATE
+    // =========================================================
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+    };
+    
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a:not(.btn-primary)');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navItems.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
 });
