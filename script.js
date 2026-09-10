@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return -(trackWidth - viewportWidth);
         }
 
+        // Hint to the browser that this element will be transformed,
+        // which keeps pointer-event hit-testing in sync during animation.
+        mainTrack.style.willChange = 'transform';
+
         const tween = gsap.to(mainTrack, {
             x: getScrollAmount,
             ease: 'none'
@@ -155,6 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
             invalidateOnRefresh: true,
             anticipatePin: 1
         });
+
+        // Re-calculate all measurements after fonts & images fully load.
+        // Without this, sizes computed before load can drift and cause
+        // the scrub to desync, making buttons temporarily unresponsive.
+        window.addEventListener('load', () => ScrollTrigger.refresh());
     });
 
     // =========================================================

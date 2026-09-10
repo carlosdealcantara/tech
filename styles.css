@@ -217,7 +217,8 @@ h1, h2, h3, h4 {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
+    isolation: isolate; /* creates own stacking context above GSAP pin-spacer */
     background: rgba(5, 5, 8, 0.8);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
