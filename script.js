@@ -164,6 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Without this, sizes computed before load can drift and cause
         // the scrub to desync, making buttons temporarily unresponsive.
         window.addEventListener('load', () => ScrollTrigger.refresh());
+
+        // Cleanup: when viewport goes below 769px (mobile), zero out GSAP transforms
+        return () => {
+            gsap.set(mainTrack, { x: 0, clearProps: 'transform,willChange' });
+            if (window.horizontalScrollTrigger) {
+                window.horizontalScrollTrigger.kill();
+                window.horizontalScrollTrigger = null;
+            }
+        };
     });
 
     // =========================================================

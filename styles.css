@@ -83,6 +83,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    max-width: 100vw;
     position: relative;
 }
 
@@ -1160,15 +1161,30 @@ h1, h2, h3, h4 {
     }
 
     /* Fallback to vertical stack on mobile for the horizontal sections */
-    .horizontal-container, .main-horizontal-track {
-        height: auto;
-        width: 100%;
-        display: block; /* Disable flex row */
+    /* !important is necessary here to override GSAP inline styles */
+    .horizontal-container {
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow: hidden !important;
+        display: block !important;
+    }
+
+    .main-horizontal-track {
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        display: block !important;
+        transform: none !important; /* Kill any GSAP translateX */
+        will-change: auto !important;
     }
 
     .horizontal-section {
-        width: 100%;
-        height: auto;
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100vh;
+        overflow: hidden !important;
         padding: 5rem 0; /* Normal vertical section padding */
     }
 
