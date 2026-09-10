@@ -490,6 +490,7 @@ h1, h2, h3, h4 {
     line-height: 1.1;
     background: linear-gradient(135deg, #fff, #94a3b8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -810,9 +811,7 @@ h1, h2, h3, h4 {
     justify-content: center;
 }
 
-.project-card:hover .project-image-wrapper {
-    /* No translation on hover since it is flush with edges */
-}
+
 
 .project-screenshot {
     width: 100%;
@@ -867,6 +866,7 @@ h1, h2, h3, h4 {
     line-height: 1.45;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Allow up to 3 lines so it never truncates our short copies */
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     padding-left: 1.5rem;

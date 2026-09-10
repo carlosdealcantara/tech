@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup V1 | Tech & Automation</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- GSAP + ScrollTrigger + ScrollToPlugin -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* ESTILOS EXCLUSIVOS DO MOCKUP V1 */
+        .pain-section {
+            width: max-content;
+            max-width: none;
+            padding-right: 4rem;
+        }
+
+        .pain-section .container {
+            max-width: none;
+            margin: 0;
+            padding-left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            height: 100%;
+        }
+
+        .pain-header-col {
+            flex-shrink: 0;
+            width: 280px;
+            text-align: left;
+        }
+
+        .pain-header-col .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .pain-header-col .section-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .pain-cards-row {
+            display: flex;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .pain-card {
+            width: 340px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-highlight);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .pain-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            filter: brightness(0.8) contrast(1.1);
+            transition: filter 0.3s ease;
+        }
+
+        .pain-card:hover .pain-card-img {
+            filter: brightness(1) contrast(1);
+        }
+
+        .pain-card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .pain-badge {
+            font-size: 0.85rem;
+            color: #a78bfa;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            padding-left: 1rem;
+            border-left: 2px solid var(--primary);
+        }
+
+        .pain-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .pain-feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .pain-feature-list li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .pain-feature-list li svg {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            margin-top: 3px;
+        }
+
+        .pain-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .pain-cta:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .pain-section .container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 2rem;
+                gap: 2rem;
+            }
+            .pain-header-col {
+                width: 100%;
+            }
+            .pain-cards-row {
+                flex-direction: column;
+                width: 100%;
+            }
+            .pain-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Glow Effects -->
+    <div class="bg-glow glow-top"></div>
+    <div class="bg-glow glow-bottom"></div>
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo" style="cursor: pointer; text-decoration: none; color: inherit; display: flex; flex-direction: row; align-items: center; gap: 0.75rem;">
+                <img src="assets/logo.png" alt="Logo" style="width: 56px; height: 56px; border-radius: 8px;">
+                <div style="display: flex; flex-direction: column;">
+                    <span class="logo-name">Carlos de Alcantara</span>
+                    <span class="logo-tag">Tech & Automation</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#services">Why It Works</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="btn-sm btn-primary">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Horizontal Scroll Container -->
+        <div id="horizontal-container" class="horizontal-container">
+            <div id="main-horizontal-track" class="main-horizontal-track">
+
+                <!-- Hero Section (Mantido para contexto) -->
+                <section id="hero" class="hero horizontal-section">
+                    <video autoplay loop muted playsinline class="hero-video-bg">
+                        <source src="assets/background.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-overlay"></div>
+                    <div class="container hero-content">
+                        <div class="hero-badge">✦ High-Performance Systems</div>
+                        <h1 class="hero-title">
+                            Digital solutions<br>
+                            <span class="text-gradient">with impact.</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            I design autonomous systems, intelligent workflows, and premium digital experiences that elevate your brand and save your time.
+                        </p>
+                        <div class="hero-scroll-indicator">
+                            <span class="mouse-icon"></span>
+                            <span class="scroll-text">Scroll to explore</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MOCKUP V1: NOVA SEÇÃO QUE SUBSTITUI SERVICES E PROCESS -->
+                <section id="services" class="pain-section horizontal-section">
+                    <div class="container">
+                        
+                        <div class="pain-header-col">
+                            <h2 class="section-title">Built for businesses like yours.</h2>
+                            <p class="section-desc">You don't need generic software. You need solutions for the real bottlenecks holding your operation back.</p>
+                            <a href="#contact" class="btn btn-outline">Let's fix it</a>
+                        </div>
+
+                        <div class="pain-cards-row">
+                            
+                            <!-- Card 1 -->
+                            <div class="pain-card">
+                                <img src="assets/pain_visibility_1788835154509.jpg" alt="Local business visibility" class="pain-card-img">
+                                <div class="pain-card-content">
+                                    <div class="pain-badge">"My competitors show up first on Google, and my website is barely converting."</div>
+                                    <h3>Digital Storefronts & SEO</h3>
+                                    <ul class="pain-feature-list">
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Premium, high-converting redesign
+                                        </li>
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Technical SEO optimization
+                                        </li>
+                                    </ul>
+                                    <a href="#contact" class="pain-cta">Sound familiar? <span>→</span></a>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="pain-card">
+                                <img src="assets/pain_followup_1788835164354.jpg" alt="Automated followups" class="pain-card-img">
+                                <div class="pain-card-content">
+                                    <div class="pain-badge">"I lose leads because I can't respond to messages and calls fast enough."</div>
+                                    <h3>Automated Booking & Capture</h3>
+                                    <ul class="pain-feature-list">
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            24/7 lead qualification
+                                        </li>
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Instant follow-up sequences
+                                        </li>
+                                    </ul>
+                                    <a href="#contact" class="pain-cta">Sound familiar? <span>→</span></a>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="pain-card">
+                                <img src="assets/pain_operations_1788835175452.jpg" alt="Business operations" class="pain-card-img">
+                                <div class="pain-card-content">
+                                    <div class="pain-badge">"I waste hours every week on repetitive admin tasks and data entry."</div>
+                                    <h3>Custom AI Workflows</h3>
+                                    <ul class="pain-feature-list">
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Replace manual tasks with code
+                                        </li>
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                            Lower overhead, hours back
+                                        </li>
+                                    </ul>
+                                    <a href="#contact" class="pain-cta">Sound familiar? <span>→</span></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <!-- FIM DO MOCKUP V1 -->
+
+                <!-- Placeholder para o Portfólio para testar o scroll -->
+                <section id="portfolio" class="horizontal-section" style="background: rgba(124, 58, 237, 0.05); min-width: 100vw; display: flex; align-items: center; justify-content: center;">
+                    <h2 class="section-title">Portfolio Section Begins Here</h2>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
