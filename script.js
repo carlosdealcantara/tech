@@ -64,9 +64,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Remove any hash from the URL so users always start clean at the top without anchors
-    if (window.location.hash) {
+    // Capture any hash requested (e.g. opened in a new tab via middle-click/scroll button)
+    const initialHash = window.location.hash ? window.location.hash.toLowerCase() : null;
+    if (initialHash) {
+        // Clear the hashtag from URL immediately so it never stays in the address bar
         history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    function scrollToSection(targetSelector, smooth = true) {
+        const target = document.querySelector(targetSelector);
+        if (!target) return;
+
+        const st = window.horizontalScrollTrigger;
+        const isDesktop = window.innerWidth > 768;
+        const duration = smooth ? 1 : 0;
+
+        if (target.classList.contains('horizontal-section') && isDesktop && st) {
+            ScrollTrigger.refresh();
+            const targetY = st.start + target.offsetLeft;
+            gsap.to(window, { scrollTo: targetY, duration: duration, ease: 'power2.inOut' });
+        } else if (isDesktop && st) {
+            const targetY = target.getBoundingClientRect().top + window.scrollY;
+            gsap.to(window, { scrollTo: targetY, duration: duration, ease: 'power2.inOut' });
+        } else {
+            gsap.to(window, { scrollTo: { y: target, offsetY: 72 }, duration: duration, ease: 'power2.inOut' });
+        }
     }
 
     // =========================================================
@@ -85,31 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const selector = targetAttr.startsWith('#') ? targetAttr : '#' + targetAttr;
-            const target = document.querySelector(selector);
-            if (!target) return;
-
-            const st = window.horizontalScrollTrigger;
-            const isDesktop = window.innerWidth > 768;
-
-            // --- CASE 1: Horizontal sections on desktop ---
-            if (
-                target.classList.contains('horizontal-section') &&
-                isDesktop &&
-                st
-            ) {
-                ScrollTrigger.refresh();
-                const targetY = st.start + target.offsetLeft;
-                gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
-            }
-            // --- CASE 2: Vertical sections (e.g. #contact) on desktop ---
-            else if (isDesktop && st) {
-                const targetY = target.getBoundingClientRect().top + window.scrollY;
-                gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
-            }
-            // --- CASE 3: Mobile (no horizontal scroll, normal vertical layout) ---
-            else {
-                gsap.to(window, { scrollTo: { y: target, offsetY: 72 }, duration: 1, ease: 'power2.inOut' });
-            }
+            scrollToSection(selector, true);
 
             if (window.innerWidth <= 768 && navLinks) navLinks.style.display = 'none';
         });
@@ -164,7 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Re-calculate all measurements after fonts & images fully load.
         // Without this, sizes computed before load can drift and cause
         // the scrub to desync, making buttons temporarily unresponsive.
-        window.addEventListener('load', () => ScrollTrigger.refresh());
+        window.addEventListener('load', () => {
+            ScrollTrigger.refresh();
+            if (initialHash) {
+                setTimeout(() => {
+                    scrollToSection(initialHash, false);
+                }, 100);
+            }
+        });
 
         // Cleanup: when viewport goes below 769px (mobile), zero out GSAP transforms
         return () => {
