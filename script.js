@@ -277,58 +277,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     // 8. IMPACT PANELS INTERACTION (MOBILE TAP & RADAR PILL)
     // =========================================================
-    const impactPanels = document.querySelectorAll('.impact-panel');
-
-    function updateRadarText(panel) {
+    function setRadarState(panel, solved) {
         const radarTxt = panel.querySelector('.radar-txt');
-        if (!radarTxt) return;
+        const radarPill = panel.querySelector('.radar-pill');
+        if (!radarTxt || !radarPill) return;
         const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
-        const isActive = panel.classList.contains('is-active');
-
-        if (isActive) {
+        if (solved) {
+            radarPill.classList.add('is-solved');
             radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
         } else {
+            radarPill.classList.remove('is-solved');
             radarTxt.textContent = radarTxt.getAttribute(`data-${lang}`) || 'Problem';
         }
     }
 
+    function updateRadarText(panel) {
+        setRadarState(panel, panel.classList.contains('is-active'));
+    }
+
     impactPanels.forEach(panel => {
-        // Toggle on click / tap
         panel.addEventListener('click', (e) => {
-            // Se clicar em link interno (caso houvesse), deixa passar
             if (e.target.tagName === 'A' || e.target.closest('a')) return;
 
             const wasActive = panel.classList.contains('is-active');
 
-            // Fecha outros cards no mobile se quiser foco em um só
+            // Fecha outros cards
             impactPanels.forEach(other => {
                 if (other !== panel && other.classList.contains('is-active')) {
                     other.classList.remove('is-active');
-                    updateRadarText(other);
+                    setRadarState(other, false);
                 }
             });
 
             if (wasActive) {
                 panel.classList.remove('is-active');
+                setRadarState(panel, false);
             } else {
                 panel.classList.add('is-active');
+                setRadarState(panel, true);
             }
-            updateRadarText(panel);
         });
 
-        // Desktop: só troca para "Solved" no hover se o card não estiver fixado como inativo
+        // Desktop hover: só mostra "Solved" se o card não está fixado como ativo
         panel.addEventListener('mouseenter', () => {
             if (!panel.classList.contains('is-active')) {
-                const radarTxt = panel.querySelector('.radar-txt');
-                if (!radarTxt) return;
-                const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
-                radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
+                setRadarState(panel, true);
             }
         });
 
-        // Desktop: ao sair, sempre recalcula o estado correto
+        // Desktop: ao sair, recalcula o estado correto
         panel.addEventListener('mouseleave', () => {
-            updateRadarText(panel);
+            if (!panel.classList.contains('is-active')) {
+                setRadarState(panel, false);
+            }
         });
     });
 

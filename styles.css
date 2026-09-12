@@ -774,19 +774,16 @@ h1, h2, h3, h4 {
     transition: color 0.3s ease;
 }
 
-/* Transição do radar quando ativo ou com hover — fundo escuro mantido */
-.impact-panel:hover .radar-dot,
-.impact-panel.is-active .radar-dot {
+/* Radar pill: estado controlado exclusivamente via JS (.is-solved no pill) */
+.radar-pill.is-solved .radar-dot {
     background: #10b981;
 }
 
-.impact-panel:hover .radar-dot::after,
-.impact-panel.is-active .radar-dot::after {
+.radar-pill.is-solved .radar-dot::after {
     background: #10b981;
 }
 
-.impact-panel:hover .radar-txt,
-.impact-panel.is-active .radar-txt {
+.radar-pill.is-solved .radar-txt {
     color: #10b981;
 }
 
