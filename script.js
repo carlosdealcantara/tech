@@ -274,8 +274,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    sections.forEach(section => {
-        observer.observe(section);
+    // =========================================================
+    // 8. IMPACT PANELS INTERACTION (MOBILE TAP & RADAR PILL)
+    // =========================================================
+    const impactPanels = document.querySelectorAll('.impact-panel');
+
+    function updateRadarText(panel) {
+        const radarTxt = panel.querySelector('.radar-txt');
+        if (!radarTxt) return;
+        const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
+        const isActive = panel.classList.contains('is-active');
+
+        if (isActive) {
+            radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
+        } else {
+            radarTxt.textContent = radarTxt.getAttribute(`data-${lang}`) || 'Problem';
+        }
+    }
+
+    impactPanels.forEach(panel => {
+        // Toggle on click / tap
+        panel.addEventListener('click', (e) => {
+            // Se clicar em link interno (caso houvesse), deixa passar
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+
+            const wasActive = panel.classList.contains('is-active');
+
+            // Fecha outros cards no mobile se quiser foco em um só
+            impactPanels.forEach(other => {
+                if (other !== panel && other.classList.contains('is-active')) {
+                    other.classList.remove('is-active');
+                    updateRadarText(other);
+                }
+            });
+
+            if (wasActive) {
+                panel.classList.remove('is-active');
+            } else {
+                panel.classList.add('is-active');
+            }
+            updateRadarText(panel);
+        });
+
+        // Desktop mouseenter / mouseleave para trocar a palavra no hover também
+        panel.addEventListener('mouseenter', () => {
+            const radarTxt = panel.querySelector('.radar-txt');
+            if (!radarTxt) return;
+            const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
+            radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
+        });
+
+        panel.addEventListener('mouseleave', () => {
+            if (!panel.classList.contains('is-active')) {
+                const radarTxt = panel.querySelector('.radar-txt');
+                if (!radarTxt) return;
+                const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
+                radarTxt.textContent = radarTxt.getAttribute(`data-${lang}`) || 'Problem';
+            }
+        });
     });
 
 });
+

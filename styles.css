@@ -684,10 +684,116 @@ h1, h2, h3, h4 {
                 border-color 0.4s ease;
 }
 
-.impact-panel:hover .impact-tech {
+.impact-panel:hover .impact-tech,
+.impact-panel.is-active .impact-tech {
     opacity: 1;
     transform: translateY(0);
     border-top-color: rgba(124, 58, 237, 0.3);
+}
+
+.impact-panel.is-active {
+    background: rgba(28, 28, 38, 0.75);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(124, 58, 237, 0.15);
+}
+
+.impact-panel.is-active .img-before {
+    opacity: 0;
+}
+
+.impact-panel.is-active .img-after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.impact-panel.is-active .impact-problem {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+.impact-panel.is-active .impact-solution {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.impact-panel.is-active .impact-quote {
+    color: #cbd5e1;
+}
+
+/* Mini Piloto de Status (Radar Pill) */
+.radar-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(10, 10, 15, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 4px 10px 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 5;
+    pointer-events: none;
+    transition: all 0.35s ease;
+}
+
+.radar-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ef4444;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.radar-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: #ef4444;
+    opacity: 0.6;
+    animation: pingRadar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingRadar {
+    70%, 100% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+}
+
+.radar-txt {
+    font-size: 0.7rem;
+    color: #e2e8f0;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Transição do radar quando ativo ou com hover */
+.impact-panel:hover .radar-pill,
+.impact-panel.is-active .radar-pill {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.35);
+}
+
+.impact-panel:hover .radar-dot,
+.impact-panel.is-active .radar-dot {
+    background: #10b981;
+}
+
+.impact-panel:hover .radar-dot::after,
+.impact-panel.is-active .radar-dot::after {
+    background: #10b981;
+}
+
+.impact-panel:hover .radar-txt,
+.impact-panel.is-active .radar-txt {
+    color: #10b981;
 }
 
 .impact-tech-item {
