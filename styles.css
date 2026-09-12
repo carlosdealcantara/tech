@@ -825,7 +825,6 @@ h1, h2, h3, h4 {
     overflow: hidden; /* Constrain image to rounded corners */
 }
 
-/* Project Screenshot "Premium" Effect */
 .project-image-wrapper {
     width: 100%;
     margin-bottom: 1.5rem;
@@ -834,9 +833,28 @@ h1, h2, h3, h4 {
     position: relative;
     display: flex;
     justify-content: center;
+    background: #0a0a0f;
 }
 
+.project-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 20, 50, 0.28) 0%, rgba(15, 23, 42, 0.38) 100%);
+    mix-blend-mode: multiply;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
 
+.project-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,8,0) 60%, rgba(20,20,25,0.85) 100%);
+    pointer-events: none;
+    z-index: 3;
+}
 
 .project-screenshot {
     width: 100%;
@@ -847,7 +865,7 @@ h1, h2, h3, h4 {
        Empty side strips will show the dark wrapper background. */
     object-fit: contain;
     object-position: center;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s ease;
     background: rgba(12, 12, 18, 0.95); /* fills letterbox areas */
 }
 
@@ -857,8 +875,23 @@ h1, h2, h3, h4 {
     }
 }
 
+/* No desktop: ao passar o mouse */
 .project-card:hover .project-screenshot {
     transform: scale(1.03);
+    filter: brightness(1.02);
+}
+
+.project-card:hover .project-image-wrapper::before {
+    opacity: 0;
+}
+
+/* No mobile: o slide que estiver ativo/centralizado no Swiper acende sozinho automaticamente */
+.swiper-slide-active .project-card .project-screenshot {
+    filter: brightness(1.02);
+}
+
+.swiper-slide-active .project-card .project-image-wrapper::before {
+    opacity: 0;
 }
 
 .project-tag {
