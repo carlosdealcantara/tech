@@ -238,12 +238,7 @@ h1, h2, h3, h4 {
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.logo:hover {
-    opacity: 0.8;
+    user-select: none;
 }
 
 .logo-name {
@@ -275,8 +270,29 @@ h1, h2, h3, h4 {
     transition: var(--transition);
 }
 
-.nav-links a:hover,
-.nav-links a.active:not(.btn-primary) {
+.nav-home-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-weight: 600 !important;
+    color: var(--text-main) !important;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+}
+
+.nav-home-btn:hover {
+    background: rgba(124, 58, 237, 0.15);
+    border-color: rgba(124, 58, 237, 0.4);
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.25);
+}
+
+.nav-links a:hover:not(.nav-home-btn):not(.btn-primary),
+.nav-links a.active:not(.btn-primary):not(.nav-home-btn) {
     color: var(--text-main);
 }
 
