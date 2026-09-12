@@ -312,8 +312,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (wasActive) {
                 panel.classList.remove('is-active');
+                panel.classList.add('is-dismissed'); // Garante que o :hover não force o modo Solução enquanto o mouse continuar em cima
                 setRadarState(panel, false);
             } else {
+                panel.classList.remove('is-dismissed');
                 panel.classList.add('is-active');
                 setRadarState(panel, true);
             }
@@ -332,15 +334,17 @@ document.addEventListener('DOMContentLoaded', () => {
             togglePanel();
         }, { passive: false });
 
-        // Desktop hover: só mostra "Solved" se o card não está fixado como ativo
+        // Desktop hover: só mostra "Solved" se o card não está fixado como ativo nem explicitamente minimizado
         panel.addEventListener('mouseenter', () => {
+            panel.classList.remove('is-dismissed');
             if (!panel.classList.contains('is-active')) {
                 setRadarState(panel, true);
             }
         });
 
-        // Desktop: ao sair, recalcula o estado correto
+        // Desktop: ao sair, recalcula o estado correto e limpa o dismiss
         panel.addEventListener('mouseleave', () => {
+            panel.classList.remove('is-dismissed');
             if (!panel.classList.contains('is-active')) {
                 setRadarState(panel, false);
             }
