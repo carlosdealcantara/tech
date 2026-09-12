@@ -298,9 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const impactPanels = document.querySelectorAll('.impact-panel');
 
     impactPanels.forEach(panel => {
-        panel.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' || e.target.closest('a')) return;
 
+        function togglePanel() {
             const wasActive = panel.classList.contains('is-active');
 
             // Fecha outros cards
@@ -318,7 +317,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 panel.classList.add('is-active');
                 setRadarState(panel, true);
             }
+        }
+
+        // Click (desktop e mobile)
+        panel.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+            togglePanel();
         });
+
+        // touchend explícito para garantir responsividade no mobile (iOS/Android)
+        panel.addEventListener('touchend', (e) => {
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+            e.preventDefault(); // evita que o click duplo dispare depois do touchend
+            togglePanel();
+        }, { passive: false });
 
         // Desktop hover: só mostra "Solved" se o card não está fixado como ativo
         panel.addEventListener('mouseenter', () => {
