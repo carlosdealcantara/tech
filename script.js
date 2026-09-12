@@ -316,21 +316,19 @@ document.addEventListener('DOMContentLoaded', () => {
             updateRadarText(panel);
         });
 
-        // Desktop mouseenter / mouseleave para trocar a palavra no hover também
+        // Desktop: só troca para "Solved" no hover se o card não estiver fixado como inativo
         panel.addEventListener('mouseenter', () => {
-            const radarTxt = panel.querySelector('.radar-txt');
-            if (!radarTxt) return;
-            const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
-            radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
-        });
-
-        panel.addEventListener('mouseleave', () => {
             if (!panel.classList.contains('is-active')) {
                 const radarTxt = panel.querySelector('.radar-txt');
                 if (!radarTxt) return;
                 const lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
-                radarTxt.textContent = radarTxt.getAttribute(`data-${lang}`) || 'Problem';
+                radarTxt.textContent = radarTxt.getAttribute(`data-${lang}-active`) || 'Solved';
             }
+        });
+
+        // Desktop: ao sair, sempre recalcula o estado correto
+        panel.addEventListener('mouseleave', () => {
+            updateRadarText(panel);
         });
     });
 

@@ -774,13 +774,7 @@ h1, h2, h3, h4 {
     transition: color 0.3s ease;
 }
 
-/* Transição do radar quando ativo ou com hover */
-.impact-panel:hover .radar-pill,
-.impact-panel.is-active .radar-pill {
-    background: rgba(16, 185, 129, 0.15);
-    border-color: rgba(16, 185, 129, 0.35);
-}
-
+/* Transição do radar quando ativo ou com hover — fundo escuro mantido */
 .impact-panel:hover .radar-dot,
 .impact-panel.is-active .radar-dot {
     background: #10b981;
