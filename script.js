@@ -295,6 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setRadarState(panel, panel.classList.contains('is-active'));
     }
 
+    const impactPanels = document.querySelectorAll('.impact-panel');
+
     impactPanels.forEach(panel => {
         panel.addEventListener('click', (e) => {
             if (e.target.tagName === 'A' || e.target.closest('a')) return;
