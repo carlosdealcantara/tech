@@ -64,19 +64,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // Remove any hash from the URL so users always start clean at the top without anchors
+    if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    // =========================================================
+    // 3. SMOOTH SCROLL (NO HASH IN URL)
+    // =========================================================
+    document.querySelectorAll('[data-target], a[href^="#"], .logo').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
+            const targetAttr = this.getAttribute('data-target') || this.getAttribute('href');
 
             // Logo / back-to-top link
-            if (!targetId || targetId === '#') {
+            if (!targetAttr || targetAttr === '#' || targetAttr === 'javascript:void(0)' || this.classList.contains('logo')) {
                 gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.inOut' });
                 if (window.innerWidth <= 768 && navLinks) navLinks.style.display = 'none';
                 return;
             }
 
-            const target = document.querySelector(targetId);
+            const selector = targetAttr.startsWith('#') ? targetAttr : '#' + targetAttr;
+            const target = document.querySelector(selector);
             if (!target) return;
 
             const st = window.horizontalScrollTrigger;
@@ -88,20 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 isDesktop &&
                 st
             ) {
-                // ScrollTrigger maps its scroll range 1:1 to the track's translateX distance.
-                // The trigger starts at `st.start` pixels of page scroll.
-                // Each section's offsetLeft inside the track equals the required X translation,
-                // which in turn equals the required scroll offset from `st.start`.
-                // We force a refresh first to ensure st.start is accurate after any layout shift.
                 ScrollTrigger.refresh();
                 const targetY = st.start + target.offsetLeft;
                 gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
             }
             // --- CASE 2: Vertical sections (e.g. #contact) on desktop ---
             else if (isDesktop && st) {
-                // To get to the contact section, we need its actual Y coordinate in the document.
-                // Since horizontal sections are now properly syncing scroll, the GSAP pin-spacer
-                // will push this section down by the exact right amount.
                 const targetY = target.getBoundingClientRect().top + window.scrollY;
                 gsap.to(window, { scrollTo: targetY, duration: 1, ease: 'power2.inOut' });
             }
