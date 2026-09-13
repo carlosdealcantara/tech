@@ -1064,6 +1064,17 @@ h1, h2, h3, h4 {
     opacity: 0;
 }
 
+/* No desktop: os dois primeiros cards visíveis (ativo e próximo imediato) acendem juntos; o terceiro fica com película */
+@media (min-width: 1024px) {
+    .swiper-slide-next .project-card .project-screenshot {
+        filter: brightness(1.02);
+    }
+
+    .swiper-slide-next .project-card .project-image-wrapper::before {
+        opacity: 0;
+    }
+}
+
 .project-tag {
     font-size: 0.7rem;
     text-transform: uppercase;
