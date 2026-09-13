@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /comparativo_portfolio.html
+
+Sitemap: https://tech.viaei.com/sitemap.xml

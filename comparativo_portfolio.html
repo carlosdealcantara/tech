@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório Mobile & Desktop | Efeito Opção 3 + Badges 3D</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            background-color: #050508;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .preview-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .preview-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-badge {
+            font-size: 0.75rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.4);
+            color: #a78bfa;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-box {
+            margin-bottom: 4rem;
+            background: rgba(15, 15, 22, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            position: relative;
+        }
+
+        .section-heading {
+            margin-bottom: 2rem;
+            border-left: 4px solid #7c3aed;
+            padding-left: 1rem;
+        }
+
+        .section-heading h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 0.35rem;
+        }
+
+        .section-heading p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            max-width: 820px;
+            line-height: 1.5;
+        }
+
+        .cards-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+            width: 100%;
+        }
+
+        /* CARD BASE */
+        .preview-card {
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-pills {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .card-pills span {
+            font-size: 0.72rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* -----------------------------------------------------------------
+           OPÇÃO 3: TINT CINEMATOGRÁFICO DE MARCA
+           ----------------------------------------------------------------- */
+        .img-wrap-tint {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0f;
+            aspect-ratio: 4/5;
+        }
+
+        .img-wrap-tint img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s ease;
+            display: block;
+        }
+
+        /* Tint suave com mistura roxo/azul */
+        .img-wrap-tint .brand-tint {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 20, 50, 0.25) 0%, rgba(15, 23, 42, 0.35) 100%);
+            mix-blend-mode: multiply;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .img-wrap-tint .gradient-feather {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5,5,8,0) 60%, rgba(20,20,25,0.85) 100%);
+            pointer-events: none;
+        }
+
+        /* No hover (Desktop) ou quando ativo (Mobile) */
+        .preview-card:hover .img-wrap-tint img,
+        .preview-card.is-active .img-wrap-tint img {
+            transform: scale(1.03);
+            filter: brightness(1.02);
+        }
+
+        .preview-card:hover .img-wrap-tint .brand-tint,
+        .preview-card.is-active .img-wrap-tint .brand-tint {
+            opacity: 0;
+        }
+
+        /* -----------------------------------------------------------------
+           BADGE 3D FLUTUANTE ESTILO A: "GLASSMORPHIC NEON PILL"
+           ----------------------------------------------------------------- */
+        .badge-floating-3d {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.4rem 0.85rem;
+            background: rgba(15, 15, 25, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #f1f5f9;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.5),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                0 0 12px rgba(124, 58, 237, 0.25);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            pointer-events: none;
+            animation: floatGlow 3s ease-in-out infinite;
+        }
+
+        .badge-floating-3d .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #a78bfa;
+            box-shadow: 0 0 8px #a78bfa;
+            animation: dotPulse 1.8s infinite;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(124, 58, 237, 0.4); }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
+        }
+
+        /* Quando o card é tocado / ativado, o badge se recolhe elegantemente ou muda */
+        .preview-card:hover .badge-floating-3d,
+        .preview-card.is-active .badge-floating-3d {
+            background: rgba(124, 58, 237, 0.85);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+            transform: scale(0.95);
+        }
+
+        /* -----------------------------------------------------------------
+           BADGE 3D FLUTUANTE ESTILO B: "CENTRAL DISCRETO NO BOTTOM DA IMAGEM"
+           ----------------------------------------------------------------- */
+        .badge-bottom-hint {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(5, 5, 8, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #cbd5e1;
+            white-space: nowrap;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .preview-card:hover .badge-bottom-hint,
+        .preview-card.is-active .badge-bottom-hint {
+            opacity: 0;
+            transform: translateX(-50%) translateY(5px);
+        }
+
+        /* SIMULAÇÃO DE CARROSSEL MOBILE */
+        .mobile-carousel-simulator {
+            max-width: 420px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 36px;
+            padding: 1.5rem 1rem;
+            background: #0a0a0f;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .mobile-notch {
+            width: 120px;
+            height: 18px;
+            background: #141419;
+            border-radius: 0 0 12px 12px;
+            margin: -1.5rem auto 1.5rem auto;
+        }
+
+        .instructions-box {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA FIXA -->
+    <div class="preview-nav">
+        <div class="preview-title">
+            <span>Experiência Mobile & Badges 3D</span>
+            <span class="preview-badge">Opção 3 Aprimorada</span>
+        </div>
+        <div style="font-size: 0.85rem; color: #a78bfa;">
+            ✦ Toque ou clique nos cards para ver o acendimento interativo
+        </div>
+    </div>
+
+    <!-- SEÇÃO 1: CARDS COM BADGE FLUTUANTE 3D -->
+    <section class="section-box">
+        <div class="section-heading">
+            <h2>Abordagem A: Badge Flutuante Glassmorphic 3D</h2>
+            <p>
+                Coloca uma pílula 3D discreta com reflexo translúcido, borda com glow roxo e ponto de pulso (<strong>✦ Toque para ver original</strong>). 
+                No celular ou computador, o usuário entende imediatamente que aquela imagem reage à sua interação.
+            </p>
+        </div>
+
+        <div class="instructions-box">
+            👉 <strong>Teste agora:</strong> Passe o mouse ou dê um clique/toque nos cards abaixo. Repare como o badge reage, o véu unificado se recolhe e o projeto brilha com 100% de clareza.
+        </div>
+
+        <div class="cards-preview-grid">
+            <!-- 1. Viaei -->
+            <div class="preview-card" onclick="toggleActive(this)">
+                <div class="img-wrap-tint">
+                    <div class="badge-floating-3d">
+                        <span class="pulse-dot"></span>
+                        <span>✦ Ver Original</span>
+                    </div>
+                    <img src="assets/viaei.jpg?v=6" alt="Viaei" style="object-position: center 20%;">
+                    <div class="brand-tint"></div>
+                    <div class="gradient-feather"></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Digital Ecosystem</div>
+                    <div class="card-title">Global Community</div>
+                    <div class="card-desc">Smart DB & real-time scheduling to scale communities without friction.</div>
+                    <div class="card-pills"><span>Scale Fast</span><span>Zero Friction</span></div>
+                </div>
+            </div>
+
+            <!-- 2. Grocery Store (BRANCO) -->
+            <div class="preview-card" onclick="toggleActive(this)">
+                <div class="img-wrap-tint">
+                    <div class="badge-floating-3d">
+                        <span class="pulse-dot"></span>
+                        <span>✦ Ver Original</span>
+                    </div>
+                    <img src="assets/grocery-store.jpg?v=3" alt="Grocery Store" style="object-position: center top;">
+                    <div class="brand-tint"></div>
+                    <div class="gradient-feather"></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">E-Commerce & Retail</div>
+                    <div class="card-title">Grocery Store</div>
+                    <div class="card-desc">Digital storefront optimizing the local retail journey to delivery.</div>
+                    <div class="card-pills"><span>Boost Sales</span><span>Local Visibility</span></div>
+                </div>
+            </div>
+
+            <!-- 3. Multiversom -->
+            <div class="preview-card" onclick="toggleActive(this)">
+                <div class="img-wrap-tint">
+                    <div class="badge-floating-3d">
+                        <span class="pulse-dot"></span>
+                        <span>✦ Ver Original</span>
+                    </div>
+                    <img src="assets/multiversom.jpg" alt="Music Studio" style="object-position: center 10%;">
+                    <div class="brand-tint"></div>
+                    <div class="gradient-feather"></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Artist Portfolio</div>
+                    <div class="card-title">Music Studio</div>
+                    <div class="card-desc">Aesthetic portfolio with rich media and an immersive user experience.</div>
+                    <div class="card-pills"><span>Premium Design</span><span>Stand Out</span></div>
+                </div>
+            </div>
+
+            <!-- 4. Property Manager (BRANCO) -->
+            <div class="preview-card" onclick="toggleActive(this)">
+                <div class="img-wrap-tint">
+                    <div class="badge-floating-3d">
+                        <span class="pulse-dot"></span>
+                        <span>✦ Ver Original</span>
+                    </div>
+                    <img src="assets/property-manager.jpg?v=4" alt="Property Manager" style="object-position: center top;">
+                    <div class="brand-tint"></div>
+                    <div class="gradient-feather"></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Corporate Portal</div>
+                    <div class="card-title">Property Manager</div>
+                    <div class="card-desc">Professional condo portal built for trust and effective lead capture.</div>
+                    <div class="card-pills"><span>Build Trust</span><span>More Leads</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: ABORDAGEM AUTÔNOMA (CARROSSEL MOBILE AUTO-ATIVO) -->
+    <section class="section-box">
+        <div class="section-heading">
+            <h2>Abordagem B: Ativação Automática no Carrossel (Zero Toque)</h2>
+            <p>
+                No mobile, quando a pessoa desliza o carrossel do Swiper, o card que fica <strong>no centro da tela já acende sozinho automaticamente</strong> (através da classe nativa <code>.swiper-slide-active</code> do Swiper). 
+                Os cards que estão nas laterais ficam com o filtro unificado suave. Quando a pessoa desliza para o lado, o card que entra no centro acende na hora!
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 1.5rem; color: #a78bfa; font-size: 0.9rem;">
+            👇 Veja a simulação de como fica em uma tela de celular:
+        </div>
+
+        <!-- SIMULADOR MOBILE -->
+        <div class="mobile-carousel-simulator">
+            <div class="mobile-notch"></div>
+            
+            <!-- Card Ativo Simulado no Celular -->
+            <div class="preview-card is-active" style="box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25); border-color: rgba(124, 58, 237, 0.4);">
+                <div class="img-wrap-tint">
+                    <img src="assets/grocery-store.jpg?v=3" alt="Grocery Store" style="object-position: center top;">
+                    <div class="brand-tint"></div>
+                    <div class="gradient-feather"></div>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-tag">E-Commerce & Retail</div>
+                        <span style="font-size: 0.65rem; color: #34d399; background: rgba(52, 211, 153, 0.15); padding: 2px 8px; border-radius: 10px;">● Em Foco (100% Puro)</span>
+                    </div>
+                    <div class="card-title">Grocery Store</div>
+                    <div class="card-desc">Vitrine digital otimizando a jornada do varejo local até a entrega.</div>
+                    <div class="card-pills"><span>Boost Sales</span><span>Local Visibility</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleActive(card) {
+            card.classList.toggle('is-active');
+        }
+    </script>
+</body>
+</html>
