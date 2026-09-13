@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 'tecnologia.viaei.com' -> Portuguese | everything else -> English
     function applyLanguage() {
         const hostname = window.location.hostname;
-        const lang = hostname.startsWith('tecnologia') ? 'pt' : 'en';
+        const isPt = hostname.startsWith('tecnologia');
+        const lang = isPt ? 'pt' : 'en';
 
         document.querySelectorAll('[data-en][data-pt]').forEach(el => {
             el.textContent = el.getAttribute('data-' + lang);
@@ -34,7 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
             el.placeholder = el.getAttribute('data-placeholder-' + lang);
         });
 
-        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+        document.documentElement.lang = isPt ? 'pt-BR' : 'en';
+
+        if (isPt) {
+            document.title = "Carlos de Alcântara | Tecnologia & Automação";
+            
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.content = "Identifico onde sua empresa está perdendo dinheiro e resolvo com automação web, melhoria de processos e fluxos inteligentes com IA.";
+
+            const canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) canonical.href = "https://tecnologia.viaei.com/";
+
+            // Open Graph
+            const ogUrl = document.querySelector('meta[property="og:url"]');
+            if (ogUrl) ogUrl.content = "https://tecnologia.viaei.com/";
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.content = "Carlos de Alcântara | Tecnologia & Automação";
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.content = "Identifico onde sua empresa está perdendo dinheiro e resolvo com automação web, melhoria de processos e fluxos inteligentes com IA.";
+            const ogLocale = document.querySelector('meta[property="og:locale"]');
+            if (ogLocale) ogLocale.content = "pt_BR";
+            const ogLocaleAlt = document.querySelector('meta[property="og:locale:alternate"]');
+            if (ogLocaleAlt) ogLocaleAlt.content = "en_US";
+
+            // Twitter Cards
+            const twUrl = document.querySelector('meta[name="twitter:url"]');
+            if (twUrl) twUrl.content = "https://tecnologia.viaei.com/";
+            const twTitle = document.querySelector('meta[name="twitter:title"]');
+            if (twTitle) twTitle.content = "Carlos de Alcântara | Tecnologia & Automação";
+            const twDesc = document.querySelector('meta[name="twitter:description"]');
+            if (twDesc) twDesc.content = "Identifico onde sua empresa está perdendo dinheiro e resolvo com automação web, melhoria de processos e fluxos inteligentes com IA.";
+        }
     }
 
     applyLanguage();
