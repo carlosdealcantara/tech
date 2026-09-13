@@ -775,16 +775,61 @@ h1, h2, h3, h4 {
 .impact-tech-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     font-size: 0.85rem;
+    color: #94a3b8;
+    transition: color 0.35s ease;
+}
+
+.impact-panel:not(.is-dismissed):hover .impact-tech-item,
+.impact-panel.is-active .impact-tech-item {
     color: var(--text-main);
 }
 
-.impact-tech-item svg {
+.tech-icon-wrap {
+    position: relative;
     width: 16px;
     height: 16px;
-    stroke: #10b981;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-icon-wrap svg {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modo Problema (padrão): X vermelho sutil */
+.tech-icon-wrap .icon-cross {
+    stroke: #ef4444;
+    opacity: 0.75;
+    transform: scale(1) rotate(0deg);
+}
+
+.tech-icon-wrap .icon-check {
+    stroke: #10b981;
+    opacity: 0;
+    transform: scale(0.4) rotate(-20deg);
+}
+
+/* Modo Solução (hover ou active): transição animada para Check verde brilhante */
+.impact-panel:not(.is-dismissed):hover .tech-icon-wrap .icon-cross,
+.impact-panel.is-active .tech-icon-wrap .icon-cross {
+    opacity: 0;
+    transform: scale(0.4) rotate(20deg);
+}
+
+.impact-panel:not(.is-dismissed):hover .tech-icon-wrap .icon-check,
+.impact-panel.is-active .tech-icon-wrap .icon-check {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
 }
 
 /* Full Site Horizontal Scroll (GSAP-powered) */
