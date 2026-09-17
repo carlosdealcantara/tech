@@ -1028,6 +1028,7 @@ h1, h2, h3, h4 {
 
 .project-screenshot {
     width: 100%;
+    height: auto;
     aspect-ratio: 4/5;
     display: block;
     border-radius: 0;
