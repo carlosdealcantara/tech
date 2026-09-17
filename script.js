@@ -28,7 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const lang = isPt ? 'pt' : 'en';
 
         document.querySelectorAll('[data-en][data-pt]').forEach(el => {
-            el.textContent = el.getAttribute('data-' + lang);
+            const content = el.getAttribute('data-' + lang);
+            if (content.includes('<') && content.includes('>')) {
+                el.innerHTML = content;
+            } else {
+                el.textContent = content;
+            }
         });
 
         document.querySelectorAll('[data-placeholder-en][data-placeholder-pt]').forEach(el => {

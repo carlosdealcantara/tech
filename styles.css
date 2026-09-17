@@ -1204,6 +1204,11 @@ h1, h2, h3, h4 {
     font-size: 1.1rem;
 }
 
+.about-content strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
 .about-stats {
     display: flex;
     gap: 2rem;
