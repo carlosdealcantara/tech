@@ -39,9 +39,10 @@
     <meta name="twitter:description" content="I find what's costing your business money and fix it with web automation, process improvement, and AI-powered workflows.">
     <meta name="twitter:image" content="https://tech.viaei.com/assets/og_preview.jpg?v=2">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts & CDN Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     
     <!-- Hreflang: tells Google these are the same site in two languages -->
@@ -151,9 +152,9 @@
 
 
     <!-- GSAP + ScrollTrigger + ScrollToPlugin -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js" defer></script>
     
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -203,7 +204,7 @@
                 <!-- Hero Section -->
                 <section id="hero" class="hero horizontal-section">
                     <!-- Background Video Setup -->
-                    <video autoplay loop muted playsinline class="hero-video-bg" poster="assets/og_preview.jpg">
+                    <video autoplay loop muted playsinline preload="metadata" class="hero-video-bg" poster="assets/og_preview.webp">
                         <!-- We will use a local asset, user needs to upload a video -->
                         <source src="assets/background.mp4" type="video/mp4">
                     </video>
@@ -575,8 +576,8 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js?v=37"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="script.js?v=38" defer></script>
 
 </body>
 </html>
