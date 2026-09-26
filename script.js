@@ -264,24 +264,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================
-    // 6. PORTFOLIO SWIPER
+    // 6. PORTFOLIO SWIPER (Resilient Initialization)
     // =========================================================
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.portfolio-swiper', {
-            loop: true,
-            slidesPerView: 1.2,
-            centeredSlides: false,
-            spaceBetween: 20,
-            speed: 800,
-            autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
-            pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
-            navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
-            breakpoints: {
-                640: { slidesPerView: 1.5, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 30 }
+    function initPortfolioSwiper() {
+        if (typeof Swiper !== 'undefined') {
+            try {
+                new Swiper('.portfolio-swiper', {
+                    loop: true,
+                    slidesPerView: 1.2,
+                    centeredSlides: false,
+                    spaceBetween: 20,
+                    speed: 800,
+                    autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+                    pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
+                    navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
+                    breakpoints: {
+                        640: { slidesPerView: 1.5, spaceBetween: 20 },
+                        1024: { slidesPerView: 3, spaceBetween: 30 }
+                    }
+                });
+            } catch (err) {
+                console.error('Error initializing Swiper:', err);
             }
-        });
+        } else {
+            // Se o script do Swiper ainda estiver sendo interpretado, tenta novamente
+            let attempts = 0;
+            const retryInterval = setInterval(() => {
+                attempts++;
+                if (typeof Swiper !== 'undefined') {
+                    clearInterval(retryInterval);
+                    initPortfolioSwiper();
+                } else if (attempts >= 20) { // Limite de 2 segundos (20 x 100ms)
+                    clearInterval(retryInterval);
+                    console.warn('Swiper script could not be loaded in time.');
+                }
+            }, 100);
+        }
     }
+
+    initPortfolioSwiper();
 
     // =========================================================
     // 7. ACTIVE MENU STATE
